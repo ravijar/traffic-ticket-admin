@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import "./App.css";
 
@@ -13,6 +14,16 @@ import Review from "./pages/Review";
 import Reports from "./pages/Reports";
 import Schedule from "./pages/Schedule";
 import Register from "./pages/Register";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#334b65",
+      main: "#001F3F",
+      dark: "#00152c",
+    },
+  },
+});
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,7 +38,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
 export default App;
