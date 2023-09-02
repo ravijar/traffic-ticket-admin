@@ -19,7 +19,7 @@ import RegisterIcon from "@mui/icons-material/PersonAddAlt1";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 160;
-const appBarHeight = 65;
+const appBarHeight = 64;
 
 const Navigation = () => {
   const location = useLocation();
@@ -119,8 +119,10 @@ const Navigation = () => {
       {/* main content */}
       <Box
         sx={{
-          background: "#f9f9f9",
+          background: "#f2f2f2",
           flexGrow: 1,
+          height: "100vh",
+          boxSizing:'border-box',
           padding: (theme) => theme.spacing(2),
         }}
       >
