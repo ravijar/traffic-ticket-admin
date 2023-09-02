@@ -16,6 +16,7 @@ import ReviewIcon from "@mui/icons-material/Policy";
 import ReportsIcon from "@mui/icons-material/Leaderboard";
 import ScheduleIcon from "@mui/icons-material/PendingActions";
 import RegisterIcon from "@mui/icons-material/PersonAddAlt1";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 160;
 const appBarHeight = 65;
@@ -77,6 +78,7 @@ const Navigation = () => {
         variant="permanent"
         anchor="left"
         sx={{
+          height: `calc(100% - ${appBarHeight}px)`,
           width: drawerWidth,
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
@@ -103,6 +105,14 @@ const Navigation = () => {
               </ListItemButton>
             </ListItem>
           ))}
+          <ListItem disablePadding sx={{marginBottom:'10px', position: "absolute", bottom: "0" }}>
+            <ListItemButton >
+              <ListItemIcon style={{ minWidth: "40px" }}>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
 
