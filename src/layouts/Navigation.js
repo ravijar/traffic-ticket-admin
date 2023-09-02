@@ -63,8 +63,12 @@ const Navigation = () => {
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+        <Toolbar sx={{ display: "flex" }}>
+          <Box sx={{ marginLeft: "32px", flexGrow: 1 }}>
+            <img src="./logo.png" width="50px" height="56px" alt="logo" />
+          </Box>
           <Typography variant="h5">TRAFFIC TICKET</Typography>
+          <Box sx={{ marginRight: "32px", width: "50px", flexGrow: 1 }} />
         </Toolbar>
       </AppBar>
 
@@ -106,7 +110,7 @@ const Navigation = () => {
       <Box
         sx={{
           background: "#f9f9f9",
-          width: "100%",
+          flexGrow: 1,
           padding: (theme) => theme.spacing(2),
         }}
       >
