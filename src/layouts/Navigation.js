@@ -1,13 +1,13 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
@@ -17,104 +17,99 @@ import ReportsIcon from "@mui/icons-material/Leaderboard";
 import ScheduleIcon from "@mui/icons-material/PendingActions";
 import RegisterIcon from "@mui/icons-material/PersonAddAlt1";
 
+const drawerWidth = 160;
+const appBarHeight = 65;
+
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const drawerWidth = 160;
+  const drawerItems = [
+    {
+      text: "Dashboard",
+      icon: <DashboardIcon />,
+      path: "/",
+    },
+    {
+      text: "Review",
+      icon: <ReviewIcon />,
+      path: "/review",
+    },
+    {
+      text: "Reports",
+      icon: <ReportsIcon />,
+      path: "/reports",
+    },
+    {
+      text: "Schedule",
+      icon: <ScheduleIcon />,
+      path: "/schedule",
+    },
+    {
+      text: "Register",
+      icon: <RegisterIcon />,
+      path: "/register",
+    },
+  ];
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-
+      {/* app bar */}
       <AppBar
         position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        color="primary"
+        sx={{
+          height: `${appBarHeight}px`,
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            TRAFFIC TICKET
-          </Typography>
+        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography variant="h5">TRAFFIC TICKET</Typography>
         </Toolbar>
       </AppBar>
 
+      {/* side drawer */}
       <Drawer
         variant="permanent"
+        anchor="left"
         sx={{
           width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
+          "& .MuiDrawer-paper": {
             boxSizing: "border-box",
+            width: `${drawerWidth}px`,
           },
         }}
       >
-        <Toolbar />
-        <Box sx={{ overflow: "auto" }}>
-          <MenuList>
-            <MenuItem
-              component={NavLink}
-              to="/"
-              selected={location.pathname === "/"}
-              sx={{ p: 2 }}
-            >
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Dashboard"} />
-            </MenuItem>
-
-            <MenuItem
-              component={NavLink}
-              to="review"
-              selected={location.pathname === "/review"}
-              sx={{ p: 2 }}
-            >
-              <ListItemIcon>
-                <ReviewIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Review"} />
-            </MenuItem>
-
-            <MenuItem
-              component={NavLink}
-              to="reports"
-              selected={location.pathname === "/reports"}
-              sx={{ p: 2 }}
-            >
-              <ListItemIcon>
-                <ReportsIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Reports"} />
-            </MenuItem>
-
-            <MenuItem
-              component={NavLink}
-              to="schedule"
-              selected={location.pathname === "/schedule"}
-              sx={{ p: 2 }}
-            >
-              <ListItemIcon>
-                <ScheduleIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Schedule"} />
-            </MenuItem>
-
-            <MenuItem
-              component={NavLink}
-              to="register"
-              selected={location.pathname === "/register"}
-              sx={{ p: 2 }}
-            >
-              <ListItemIcon>
-                <RegisterIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Register"} />
-            </MenuItem>
-          </MenuList>
-        </Box>
+        <List
+          sx={{
+            height: `calc(100% - ${appBarHeight}px)`,
+            marginTop: `${appBarHeight}px`,
+          }}
+        >
+          {drawerItems.map((item) => (
+            <ListItem key={item.text} disablePadding>
+              <ListItemButton
+                onClick={() => navigate(item.path)}
+                selected={location.pathname === item.path}
+              >
+                <ListItemIcon style={{ minWidth: "40px" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText>{item.text}</ListItemText>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      {/* main content */}
+      <Box
+        sx={{
+          background: "#f9f9f9",
+          width: "100%",
+          padding: (theme) => theme.spacing(2),
+        }}
+      >
         <Toolbar />
         <Outlet />
       </Box>
