@@ -303,54 +303,20 @@ const Schedule = () => {
   return (
     <Container>
       <Grid container spacing={6}>
-        {/* schedules table */}
-        <Grid item xs={12} md={7}>
-          <Card>
-            <Container>
-              <CardHeader title="Schedules" />
-              <CardContent>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer
-                    components={["DatePicker"]}
-                    sx={{ marginBottom: 3 }}
-                  >
-                    <DatePicker label="Choose Date" sx={{ flexGrow: 1 }} />
-                  </DemoContainer>
-                </LocalizationProvider>
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow sx={{ bgcolor: mainHeader }}>
-                        <TableCell />
-                        <TableCell align="center" sx={{ color: "white" }}>
-                          Location
-                        </TableCell>
-                        <TableCell align="center" sx={{ color: "white" }}>
-                          Day Shift
-                        </TableCell>
-                        <TableCell align="center" sx={{ color: "white" }}>
-                          Night Shift
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {data.map((row) => (
-                        <Row key={row.location} row={row} />
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Container>
-          </Card>
-        </Grid>
-
         {/* create schedule */}
         <Grid item xs={12} md={5}>
           <Card>
             <Container>
               <CardHeader title="Create Schedule" />
               <CardContent>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["DatePicker"]}
+                    sx={{ marginBottom: 3 }}
+                  >
+                    <DatePicker label="Date*" sx={{ flexGrow: 1 }} />
+                  </DemoContainer>
+                </LocalizationProvider>
                 <form onSubmit={handleSubmit} noValidate autoComplete="off">
                   <TextField
                     sx={{ marginBottom: 3 }}
@@ -379,7 +345,11 @@ const Schedule = () => {
                   <FormControl sx={{ marginBottom: 4 }}>
                     <FormLabel>Select Shift</FormLabel>
                     <Container>
-                      <RadioGroup row value={shift} onChange={(e)=> setShift(e.target.value)}>
+                      <RadioGroup
+                        row
+                        value={shift}
+                        onChange={(e) => setShift(e.target.value)}
+                      >
                         <FormControlLabel
                           value="day"
                           control={<Radio />}
@@ -403,6 +373,40 @@ const Schedule = () => {
                     Assign Officer
                   </Button>
                 </form>
+              </CardContent>
+            </Container>
+          </Card>
+        </Grid>
+
+        {/* schedules table */}
+        <Grid item xs={12} md={7}>
+          <Card>
+            <Container>
+              <CardHeader title="Schedules" />
+              <CardContent>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow sx={{ bgcolor: mainHeader }}>
+                        <TableCell />
+                        <TableCell align="center" sx={{ color: "white" }}>
+                          Location
+                        </TableCell>
+                        <TableCell align="center" sx={{ color: "white" }}>
+                          Day Shift
+                        </TableCell>
+                        <TableCell align="center" sx={{ color: "white" }}>
+                          Night Shift
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {data.map((row) => (
+                        <Row key={row.location} row={row} />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </CardContent>
             </Container>
           </Card>
