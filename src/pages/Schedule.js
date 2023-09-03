@@ -31,6 +31,8 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
+import dayjs from "dayjs";
+
 // table colors
 const mainHeader = "#424242";
 const mainRow = "#EEEEEE";
@@ -161,6 +163,7 @@ const Schedule = () => {
   const [officerId, setOfficerId] = useState("");
   const [location, setLocation] = useState("");
   const [shift, setShift] = useState("day");
+  const [date, setDate] = useState(dayjs(new Date()));
 
   // input errors
   const [officerIdError, setOfficerIdError] = useState(false);
@@ -179,7 +182,7 @@ const Schedule = () => {
 
     // submit action
     if (officerId && location) {
-      console.log(officerId, location, shift);
+      console.log(officerId, location, shift, date);
     }
   };
 
@@ -314,7 +317,12 @@ const Schedule = () => {
                     components={["DatePicker"]}
                     sx={{ marginBottom: 3 }}
                   >
-                    <DatePicker label="Date*" sx={{ flexGrow: 1 }} />
+                    <DatePicker
+                      label="Date*"
+                      sx={{ flexGrow: 1 }}
+                      onChange={setDate}
+                      value={date}
+                    />
                   </DemoContainer>
                 </LocalizationProvider>
                 <form onSubmit={handleSubmit} noValidate autoComplete="off">
