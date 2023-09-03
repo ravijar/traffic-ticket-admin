@@ -121,7 +121,8 @@ const Navigation = () => {
         sx={{
           background: "#f2f2f2",
           flexGrow: 1,
-          height: "100vh",
+          height: "100%",
+          minHeight : '100vh',
           boxSizing:'border-box',
           padding: (theme) => theme.spacing(2),
         }}
