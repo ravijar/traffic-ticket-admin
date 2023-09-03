@@ -20,6 +20,10 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+
 // table colors
 const mainHeader = "#424242";
 const mainRow = "#EEEEEE";
@@ -78,7 +82,11 @@ const Row = (props) => {
                   </TableRow>
                   {dayShiftOfficers.length === 0 ? (
                     <TableRow>
-                      <TableCell align="center" colSpan={3} sx={{bgcolor:subRow}}>
+                      <TableCell
+                        align="center"
+                        colSpan={3}
+                        sx={{ bgcolor: subRow }}
+                      >
                         No Schedules!
                       </TableCell>
                     </TableRow>
@@ -107,7 +115,11 @@ const Row = (props) => {
                   </TableRow>
                   {nightShiftOfficers.length === 0 ? (
                     <TableRow>
-                      <TableCell align="center" colSpan={3} sx={{bgcolor:subRow}}>
+                      <TableCell
+                        align="center"
+                        colSpan={3}
+                        sx={{ bgcolor: subRow }}
+                      >
                         No Schedules!
                       </TableCell>
                     </TableRow>
@@ -264,6 +276,14 @@ const Schedule = () => {
             <Container>
               <CardHeader title="Schedules" />
               <CardContent>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["DatePicker"]}
+                    sx={{ marginBottom: 3 }}
+                  >
+                    <DatePicker label="Choose Date" sx={{ flexGrow: 1 }} />
+                  </DemoContainer>
+                </LocalizationProvider>
                 <TableContainer component={Paper}>
                   <Table>
                     <TableHead>
