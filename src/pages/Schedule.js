@@ -1,20 +1,27 @@
 import React, { Fragment, useState } from "react";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
   Collapse,
   Container,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid,
   IconButton,
   Paper,
+  Radio,
+  RadioGroup,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
 } from "@mui/material";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -150,6 +157,32 @@ const Row = (props) => {
 };
 
 const Schedule = () => {
+  // input values
+  const [officerId, setOfficerId] = useState("");
+  const [location, setLocation] = useState("");
+  const [shift, setShift] = useState("day");
+
+  // input errors
+  const [officerIdError, setOfficerIdError] = useState(false);
+  const [locationError, setLocationError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // checking for empty textfields
+    if (officerId === "") {
+      setOfficerIdError(true);
+    }
+    if (location === "") {
+      setLocationError(true);
+    }
+
+    // submit action
+    if (officerId && location) {
+      console.log(officerId, location, shift);
+    }
+  };
+
   // dummy data
   const data = [
     {
@@ -317,7 +350,60 @@ const Schedule = () => {
           <Card>
             <Container>
               <CardHeader title="Create Schedule" />
-              <CardContent></CardContent>
+              <CardContent>
+                <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                  <TextField
+                    sx={{ marginBottom: 3 }}
+                    onChange={(e) => {
+                      setOfficerId(e.target.value);
+                      setOfficerIdError(false);
+                    }}
+                    label="Officer ID"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={officerIdError}
+                  />
+                  <TextField
+                    sx={{ marginBottom: 3 }}
+                    onChange={(e) => {
+                      setLocation(e.target.value);
+                      setLocationError(false);
+                    }}
+                    label="Location"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={locationError}
+                  />
+                  <FormControl sx={{ marginBottom: 4 }}>
+                    <FormLabel>Select Shift</FormLabel>
+                    <Container>
+                      <RadioGroup row value={shift} onChange={(e)=> setShift(e.target.value)}>
+                        <FormControlLabel
+                          value="day"
+                          control={<Radio />}
+                          label="Day"
+                        />
+                        <FormControlLabel
+                          value="night"
+                          control={<Radio />}
+                          label="Night"
+                        />
+                      </RadioGroup>
+                    </Container>
+                  </FormControl>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    size="large"
+                    sx={{ marginBottom: 4 }}
+                  >
+                    Assign Officer
+                  </Button>
+                </form>
+              </CardContent>
             </Container>
           </Card>
         </Grid>
