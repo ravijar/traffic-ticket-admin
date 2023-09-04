@@ -47,35 +47,21 @@ const Dashboard = () => {
 
   const recentAccidents = [
     {
+      id: 1,
       location: "Rawathawatta",
       date: "04/09/2023",
       time: "04:11 PM",
     },
     {
+      id: 2,
       location: "Molpe Rd",
       date: "04/09/2023",
       time: "08:30 AM",
     },
-    {
-      location: "Seevali Rd",
-      date: "03/09/2023",
-      time: "10:20 PM",
-    },
-    {
-      location: "Ariyawansa Rd",
-      date: "02/09/2023",
-      time: "11:45 AM",
-    },
-    {
-      location: "Mendis Ln",
-      date: "02/09/2023",
-      time: "07:15 AM",
-    },
-    {
-      location: "Molpe Rd",
-      date: "02/09/2023",
-      time: "04:20 AM",
-    },
+    { id: 3, location: "Seevali Rd", date: "03/09/2023", time: "10:20 PM" },
+    { id: 4, location: "Ariyawansa Rd", date: "02/09/2023", time: "11:45 AM" },
+    { id: 5, location: "Mendis Ln", date: "02/09/2023", time: "07:15 AM" },
+    { id: 6, location: "Molpe Rd", date: "02/09/2023", time: "04:20 AM" },
   ];
 
   return (
@@ -293,7 +279,10 @@ const Dashboard = () => {
                     </TableHead>
                     <TableBody sx={{ bgcolor: "#EEEEEE" }}>
                       {recentAccidents.map((accident) => (
-                        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                        <TableRow
+                          key={accident.id}
+                          sx={{ "& > *": { borderBottom: "unset" } }}
+                        >
                           <TableCell align="center">
                             {accident.location}
                           </TableCell>
