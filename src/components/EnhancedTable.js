@@ -1,18 +1,21 @@
 import {
   Box,
-  Checkbox,
-  FormControlLabel,
+  IconButton,
   Paper,
-  Switch,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TablePagination,
   TableRow,
+  Toolbar,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 import { useState, useMemo } from "react";
-import EnhancedTableToolbar from "./EnhancedTableToolbar";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+
 import EnhancedTableHead from "./EnhancedTableHead";
 
 const descendingComparator = (a, b, orderBy) => {
@@ -48,7 +51,6 @@ const EnhancedTable = (props) => {
 
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState(defaultValues.OrderBy);
-  const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(defaultValues.dense);
   const [rowsPerPage, setRowsPerPage] = useState(defaultValues.rowsPerPage);
@@ -57,35 +59,6 @@ const EnhancedTable = (props) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -97,12 +70,6 @@ const EnhancedTable = (props) => {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -113,16 +80,40 @@ const EnhancedTable = (props) => {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, rows]
   );
 
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          tableTitle={tableTitle}
-        />
+        <Toolbar
+          sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+          }}
+        >
+          <Typography
+            sx={{ flex: "1 1 100%" }}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            {tableTitle}
+          </Typography>
+          {dense ? (
+            <Tooltip title="Expand">
+              <IconButton onClick={() => setDense(false)}>
+                <FullscreenIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Shrink">
+              <IconButton onClick={() => setDense(true)}>
+                <FullscreenExitIcon />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Toolbar>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -130,41 +121,22 @@ const EnhancedTable = (props) => {
             size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
               headCells={headCells}
               alignValues={alignValues.head}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name);
-                const labelId = `enhanced-table-checkbox-${index}`;
                 const rowData = Object.values(row);
-
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={index}
-                    selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell>
                     {rowData.map((cellData, index) => (
                       <TableCell key={index} align={alignValues.body[index]}>
                         {cellData}
@@ -179,7 +151,7 @@ const EnhancedTable = (props) => {
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={headCells.length+1} />
+                  <TableCell colSpan={headCells.length + 1} />
                 </TableRow>
               )}
             </TableBody>
@@ -195,10 +167,6 @@ const EnhancedTable = (props) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 };
