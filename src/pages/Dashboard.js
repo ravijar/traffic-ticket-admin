@@ -24,65 +24,105 @@ const Dashboard = () => {
   const weeklyCount = [1, 5, 2, 0, 3, 2, 4];
   const monthlyCount = [10, 13, 24, 6, 12, 2, 20, 11, 14, 17, 4, 9];
 
+  const detectedViolations = 5;
+  const reportedAccidents = 3;
+
   return (
     <Box>
-      {/* vehicle count chart */}
       <Grid container spacing={3}>
         <Grid item xs={12} md={3}>
-          <Card>
-            <CardHeader
-              title="Vehicle Count"
-              titleTypographyProps={{ color: titleColor, variant: titleSize }}
-              subheader="(last 24 hours)"
-              subheaderTypographyProps={{
-                color: subHeaderColor,
-                variant: subHeaderSize,
-              }}
-              sx={{ textAlign: "center", bgcolor: headerBgColor }}
-            />
-            <CardContent sx={{ bgcolor: bodyBgColor }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
-                  flexWrap: "wrap",
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* vehicle count chart */}
+            <Card sx={{ marginBottom: 2 }}>
+              <CardHeader
+                title="Vehicle Count"
+                titleTypographyProps={{ color: titleColor, variant: titleSize }}
+                subheader="(last 24 hours)"
+                subheaderTypographyProps={{
+                  color: subHeaderColor,
+                  variant: subHeaderSize,
                 }}
-              >
-                <PieChart
-                  series={[
-                    {
-                      data: vehicleCount,
-                      innerRadius: 50,
-                      outerRadius: 100,
-                      paddingAngle: 3,
-                      cornerRadius: 5,
-                      startAngle: 0,
-                      endAngle: 360,
-                      cx: 105,
-                      cy: 105,
-                    },
-                  ]}
-                  legend={{
-                    direction: "column",
-                    position: {
-                      vertical: "middle",
-                      horizontal: "right",
-                    },
-                  }}
+                sx={{ textAlign: "center", bgcolor: headerBgColor }}
+              />
+              <CardContent sx={{ bgcolor: bodyBgColor }}>
+                <Box
                   sx={{
-                    "--ChartsLegend-rootOffsetX": "-50px",
-                    "--ChartsLegend-rootOffsetY": "-10px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                    flexWrap: "wrap",
                   }}
-                  width={400}
-                  height={210}
-                />
-              </Box>
-            </CardContent>
-          </Card>
+                >
+                  <PieChart
+                    series={[
+                      {
+                        data: vehicleCount,
+                        innerRadius: 50,
+                        outerRadius: 100,
+                        paddingAngle: 3,
+                        cornerRadius: 5,
+                        startAngle: 0,
+                        endAngle: 360,
+                        cx: 105,
+                        cy: 105,
+                      },
+                    ]}
+                    legend={{
+                      direction: "column",
+                      position: {
+                        vertical: "middle",
+                        horizontal: "right",
+                      },
+                    }}
+                    sx={{
+                      "--ChartsLegend-rootOffsetX": "-50px",
+                      "--ChartsLegend-rootOffsetY": "-10px",
+                    }}
+                    width={400}
+                    height={210}
+                  />
+                </Box>
+              </CardContent>
+
+              {/* violation detections count */}
+            </Card>
+            <Card sx={{ marginBottom: 2 }}>
+              <CardHeader
+                title="Violation Detections"
+                titleTypographyProps={{ color: titleColor, variant: titleSize }}
+                subheader={detectedViolations}
+                subheaderTypographyProps={{
+                  color: subHeaderColor,
+                  variant: subHeaderSize,
+                }}
+                sx={{ textAlign: "center", bgcolor: headerBgColor }}
+              />
+
+              {/* reported accidents count */}
+            </Card>
+            <Card sx={{ marginBottom: 2 }}>
+              <CardHeader
+                title="Reported Accidents"
+                titleTypographyProps={{ color: titleColor, variant: titleSize }}
+                subheader={reportedAccidents}
+                subheaderTypographyProps={{
+                  color: subHeaderColor,
+                  variant: subHeaderSize,
+                }}
+                sx={{ textAlign: "center", bgcolor: headerBgColor }}
+              />
+            </Card>
+          </Box>
         </Grid>
 
-        {/* recent accidents */}
+        {/* accidents count graphs */}
         <Grid item xs={12} md={5}>
           <Card>
             <CardHeader
