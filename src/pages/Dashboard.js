@@ -1,6 +1,20 @@
 import { PieChart } from "@mui/x-charts/PieChart";
-import { Box, Card, CardContent, CardHeader, Grid } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { LineChart } from "@mui/x-charts";
+import dayjs from "dayjs";
 
 const Dashboard = () => {
   // card data
@@ -10,6 +24,8 @@ const Dashboard = () => {
   const titleColor = "white";
   const subHeaderSize = "p";
   const subHeaderColor = "white";
+
+  const date = dayjs(new Date()).format("LL");
 
   // dummy data
   const vehicleCount = [
@@ -26,6 +42,41 @@ const Dashboard = () => {
 
   const detectedViolations = 5;
   const reportedAccidents = 3;
+
+  const policeStation = "Moratumulla";
+
+  const recentAccidents = [
+    {
+      location: "Rawathawatta",
+      date: "04/09/2023",
+      time: "04:11 PM",
+    },
+    {
+      location: "Molpe Rd",
+      date: "04/09/2023",
+      time: "08:30 AM",
+    },
+    {
+      location: "Seevali Rd",
+      date: "03/09/2023",
+      time: "10:20 PM",
+    },
+    {
+      location: "Ariyawansa Rd",
+      date: "02/09/2023",
+      time: "11:45 AM",
+    },
+    {
+      location: "Mendis Ln",
+      date: "02/09/2023",
+      time: "07:15 AM",
+    },
+    {
+      location: "Molpe Rd",
+      date: "02/09/2023",
+      time: "04:20 AM",
+    },
+  ];
 
   return (
     <Box>
@@ -185,6 +236,77 @@ const Dashboard = () => {
               </Box>
             </CardContent>
           </Card>
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* police station banner */}
+            <Card sx={{ marginBottom: 2 }}>
+              <CardHeader
+                title={policeStation.toUpperCase()}
+                titleTypographyProps={{ color: titleColor, variant: "h4" }}
+                subheader={date}
+                subheaderTypographyProps={{
+                  color: subHeaderColor,
+                  variant: "h7",
+                }}
+                sx={{
+                  textAlign: "center",
+                  bgcolor: headerBgColor,
+                  color: "white",
+                }}
+              />
+            </Card>
+
+            <Card>
+              <CardHeader
+                title="Recent Accidents"
+                titleTypographyProps={{ color: titleColor, variant: titleSize }}
+                subheaderTypographyProps={{
+                  color: subHeaderColor,
+                  variant: subHeaderSize,
+                }}
+                sx={{ textAlign: "center", bgcolor: headerBgColor }}
+              />
+              <CardContent sx={{ bgcolor: bodyBgColor }}>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow sx={{ bgcolor: "#424242" }}>
+                        <TableCell align="center" sx={{ color: "white" }}>
+                          Location
+                        </TableCell>
+                        <TableCell align="center" sx={{ color: "white" }}>
+                          Date
+                        </TableCell>
+                        <TableCell align="center" sx={{ color: "white" }}>
+                          Time
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody sx={{ bgcolor: "#EEEEEE" }}>
+                      {recentAccidents.map((accident) => (
+                        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                          <TableCell align="center">
+                            {accident.location}
+                          </TableCell>
+                          <TableCell align="center">{accident.date}</TableCell>
+                          <TableCell align="center">{accident.time}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </CardContent>
+            </Card>
+          </Box>
         </Grid>
       </Grid>
     </Box>
