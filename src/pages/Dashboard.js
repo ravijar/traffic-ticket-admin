@@ -1,7 +1,16 @@
 import { PieChart } from "@mui/x-charts/PieChart";
-import { Card, CardContent, CardHeader, Container, Grid } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Grid } from "@mui/material";
+import { LineChart } from "@mui/x-charts";
 
 const Dashboard = () => {
+  // card data
+  const headerBgColor = "#616161";
+  const bodyBgColor = "#D2D2D2";
+  const titleSize = "h6";
+  const titleColor = "white";
+  const subHeaderSize = "p";
+  const subHeaderColor = "white";
+
   // dummy data
   const vehicleCount = [
     { label: "Molpe Rd", value: 105 },
@@ -12,18 +21,34 @@ const Dashboard = () => {
     { label: "Ariyawansa Rd", value: 38 },
   ];
 
+  const weeklyCount = [1, 5, 2, 0, 3, 2, 4];
+  const monthlyCount = [10, 13, 24, 6, 12, 2, 20, 11, 14, 17, 4, 9];
+
   return (
-    <Container>
+    <Box>
       {/* vehicle count chart */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
           <Card>
             <CardHeader
               title="Vehicle Count"
-              sx={{ textAlign: "center", bgcolor: "#616161", color: "white" }}
+              titleTypographyProps={{ color: titleColor, variant: titleSize }}
+              subheader="(last 24 hours)"
+              subheaderTypographyProps={{
+                color: subHeaderColor,
+                variant: subHeaderSize,
+              }}
+              sx={{ textAlign: "center", bgcolor: headerBgColor }}
             />
-            <Container sx={{ bgcolor: "#D2D2D2" }}>
-              <CardContent>
+            <CardContent sx={{ bgcolor: bodyBgColor }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  flexWrap: "wrap",
+                }}
+              >
                 <PieChart
                   series={[
                     {
@@ -35,39 +60,94 @@ const Dashboard = () => {
                       startAngle: 0,
                       endAngle: 360,
                       cx: 105,
-                      cy: 100,
+                      cy: 105,
                     },
                   ]}
                   legend={{
                     direction: "column",
                     position: {
-                      vertical: "bottom",
-                      horizontal: "middle",
+                      vertical: "middle",
+                      horizontal: "right",
                     },
                   }}
                   sx={{
-                    "--ChartsLegend-rootOffsetX": "30px",
-                    "--ChartsLegend-rootOffsetY": "-150px",
+                    "--ChartsLegend-rootOffsetX": "-50px",
+                    "--ChartsLegend-rootOffsetY": "-10px",
                   }}
-                  width="210"
-                  height="370"
+                  width={400}
+                  height={210}
                 />
-              </CardContent>
-            </Container>
+              </Box>
+            </CardContent>
           </Card>
         </Grid>
 
         {/* recent accidents */}
         <Grid item xs={12} md={5}>
           <Card>
-            <Container>
-              <CardHeader />
-              <CardContent></CardContent>
-            </Container>
+            <CardHeader
+              title="Accidents Count"
+              titleTypographyProps={{ color: titleColor, variant: titleSize }}
+              subheaderTypographyProps={{
+                color: subHeaderColor,
+                variant: subHeaderSize,
+              }}
+              sx={{
+                textAlign: "center",
+                bgcolor: headerBgColor,
+                color: "white",
+              }}
+            />
+            <CardContent sx={{ bgcolor: bodyBgColor }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  flexWrap: "wrap",
+                }}
+              >
+                <LineChart
+                  height={250}
+                  series={[{ data: weeklyCount, label: "Weekly" }]}
+                  xAxis={[
+                    {
+                      scaleType: "point",
+                      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                    },
+                  ]}
+                />
+                <LineChart
+                  height={250}
+                  series={[
+                    { data: monthlyCount, label: "Monthly", color: "#4e79a7" },
+                  ]}
+                  xAxis={[
+                    {
+                      scaleType: "point",
+                      data: [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec",
+                      ],
+                    },
+                  ]}
+                />
+              </Box>
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 
