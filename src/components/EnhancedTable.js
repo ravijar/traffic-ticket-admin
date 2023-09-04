@@ -44,21 +44,14 @@ const stableSort = (array, comparator) => {
 };
 
 const EnhancedTable = (props) => {
-  const {
-    defaultOrderBy,
-    defaultRowsPerPage,
-    defaultDense,
-    tableTitle,
-    headCells,
-    rows,
-  } = props;
+  const { defaultValues, alignValues, tableTitle, headCells, rows } = props;
 
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState(defaultOrderBy);
+  const [orderBy, setOrderBy] = useState(defaultValues.OrderBy);
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [dense, setDense] = useState(defaultDense);
-  const [rowsPerPage, setRowsPerPage] = useState(defaultRowsPerPage);
+  const [dense, setDense] = useState(defaultValues.dense);
+  const [rowsPerPage, setRowsPerPage] = useState(defaultValues.rowsPerPage);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -144,11 +137,13 @@ const EnhancedTable = (props) => {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
               headCells={headCells}
+              alignValues={alignValues.head}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.name);
                 const labelId = `enhanced-table-checkbox-${index}`;
+                const rowData = Object.values(row);
 
                 return (
                   <TableRow
@@ -157,7 +152,7 @@ const EnhancedTable = (props) => {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={index}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
@@ -170,18 +165,11 @@ const EnhancedTable = (props) => {
                         }}
                       />
                     </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    {rowData.map((cellData, index) => (
+                      <TableCell key={index} align={alignValues.body[index]}>
+                        {cellData}
+                      </TableCell>
+                    ))}
                   </TableRow>
                 );
               })}
@@ -191,7 +179,7 @@ const EnhancedTable = (props) => {
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={headCells.length+1} />
                 </TableRow>
               )}
             </TableBody>

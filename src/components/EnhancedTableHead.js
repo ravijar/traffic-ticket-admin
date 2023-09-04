@@ -6,7 +6,7 @@ import {
   TableRow,
   TableSortLabel,
 } from "@mui/material";
-import { visuallyHidden } from '@mui/utils';
+import { visuallyHidden } from "@mui/utils";
 
 const EnhancedTableHead = (props) => {
   const {
@@ -17,6 +17,7 @@ const EnhancedTableHead = (props) => {
     rowCount,
     onRequestSort,
     headCells,
+    alignValues,
   } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -36,11 +37,10 @@ const EnhancedTableHead = (props) => {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {headCells.map((headCell, index) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "normal"}
+            align={alignValues[index]}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
