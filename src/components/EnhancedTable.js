@@ -6,8 +6,10 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableHead,
   TablePagination,
   TableRow,
+  TableSortLabel,
   Toolbar,
   Tooltip,
   Typography,
@@ -16,8 +18,37 @@ import { useState, useMemo } from "react";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 
-import EnhancedTableHead from "./EnhancedTableHead";
+import { visuallyHidden } from "@mui/utils";
 
+/* ======= Input Props =======
+  
+  1.  defaultValues : Object
+        1. order : String ('asc' | 'desc')
+        2. orderBy : String ('id' of column)
+        3. dense : Boolean 
+        4. rowsPerPage : Numeric
+  2. alignValues : Object
+        1. head : String Array ('left' | 'center' | 'right')
+        1. body : String Array ('left' | 'center' | 'right')              
+  3. styles : Object
+        1. bgColors : Object
+              1. head : String
+              2. body : String
+              3. toolbar : String
+              4. pagination : String
+        2. fontColors : Object
+              1. head : String
+              2. body : String
+              3. toolbar : String
+              4. pagination : String
+  4. headCells : Object Array
+        1. id : String
+        2. label : String
+  5. rows : Object Array ([key : value] pairs)
+  6. tableTitle : String
+*/
+
+// comparator logic used for sorting
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -34,6 +65,7 @@ const getComparator = (order, orderBy) => {
     : (a, b) => -descendingComparator(a, b, orderBy);
 };
 
+// sorting algorithm
 const stableSort = (array, comparator) => {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -46,15 +78,54 @@ const stableSort = (array, comparator) => {
   return stabilizedThis.map((el) => el[0]);
 };
 
-const EnhancedTable = (props) => {
-  const { defaultValues, alignValues, tableTitle, headCells, rows } = props;
+// enhanced table head
+const EnhancedTableHead = (props) => {
+  const { order, orderBy, onRequestSort, headCells, alignValues, styles } =
+    props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
 
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState(defaultValues.OrderBy);
+  return (
+    <TableHead sx={{ bgcolor: styles.bgColor }}>
+      <TableRow>
+        {headCells.map((headCell, index) => (
+          <TableCell
+            key={headCell.id}
+            align={alignValues[index]}
+            sortDirection={orderBy === headCell.id ? order : false}
+            sx={{ color: styles.fontColor }}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : "asc"}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <Box component="span" sx={visuallyHidden}>
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                </Box>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+};
+
+const EnhancedTable = (props) => {
+  const { defaultValues, alignValues, tableTitle, headCells, rows, styles } =
+    props;
+
+  const [order, setOrder] = useState(defaultValues.order);
+  const [orderBy, setOrderBy] = useState(defaultValues.orderBy);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(defaultValues.dense);
   const [rowsPerPage, setRowsPerPage] = useState(defaultValues.rowsPerPage);
 
+  // handlers
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -70,10 +141,11 @@ const EnhancedTable = (props) => {
     setPage(0);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
+  // avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  // getting data to visualize in a page.
   const visibleRows = useMemo(
     () =>
       stableSort(rows, getComparator(order, orderBy)).slice(
@@ -90,6 +162,8 @@ const EnhancedTable = (props) => {
           sx={{
             pl: { sm: 2 },
             pr: { xs: 1, sm: 1 },
+            bgcolor: styles.bgColors.toolbar,
+            color: styles.fontColors.toolbar,
           }}
         >
           <Typography
@@ -102,13 +176,19 @@ const EnhancedTable = (props) => {
           </Typography>
           {dense ? (
             <Tooltip title="Expand">
-              <IconButton onClick={() => setDense(false)}>
+              <IconButton
+                onClick={() => setDense(false)}
+                sx={{ color: styles.fontColors.toolbar }}
+              >
                 <FullscreenIcon />
               </IconButton>
             </Tooltip>
           ) : (
             <Tooltip title="Shrink">
-              <IconButton onClick={() => setDense(true)}>
+              <IconButton
+                onClick={() => setDense(true)}
+                sx={{ color: styles.fontColors.toolbar }}
+              >
                 <FullscreenExitIcon />
               </IconButton>
             </Tooltip>
@@ -126,8 +206,12 @@ const EnhancedTable = (props) => {
               onRequestSort={handleRequestSort}
               headCells={headCells}
               alignValues={alignValues.head}
+              styles={{
+                bgColor: styles.bgColors.head,
+                fontColor: styles.fontColors.head,
+              }}
             />
-            <TableBody>
+            <TableBody sx={{ bgcolor: styles.bgColors.body }}>
               {visibleRows.map((row, index) => {
                 const rowData = Object.values(row);
                 return (
@@ -138,7 +222,11 @@ const EnhancedTable = (props) => {
                     sx={{ cursor: "pointer" }}
                   >
                     {rowData.map((cellData, index) => (
-                      <TableCell key={index} align={alignValues.body[index]}>
+                      <TableCell
+                        key={index}
+                        align={alignValues.body[index]}
+                        sx={{ color: styles.fontColors.body }}
+                      >
                         {cellData}
                       </TableCell>
                     ))}
@@ -165,6 +253,10 @@ const EnhancedTable = (props) => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{
+            bgcolor: styles.bgColors.pagination,
+            color: styles.fontColors.pagination,
+          }}
         />
       </Paper>
     </Box>
