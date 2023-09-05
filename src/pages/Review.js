@@ -68,13 +68,28 @@ const Review = () => {
     <Container>
       <EnhancedTable
         defaultValues={{
+          order: "desc",
           orderBy: "date",
-          dense: false,
-          rowsPerPage: 5,
+          dense: true,
+          rowsPerPage: 10,
         }}
         alignValues={{
           body: ["center", "center", "center", "center"],
           head: ["center", "center", "center", "center"],
+        }}
+        styles={{
+          bgColors: {
+            head: "#757575",
+            body: "#EEEEEE",
+            toolbar: "#424242",
+            pagination: "#757575",
+          },
+          fontColors: {
+            head: "white",
+            body: "black",
+            toolbar: "white",
+            pagination: "white",
+          },
         }}
         tableTitle="CCTV Violation Detections"
         headCells={head}
