@@ -16,6 +16,16 @@ import {
 import { LineChart } from "@mui/x-charts";
 import dayjs from "dayjs";
 
+import {
+  vehicleCount,
+  weeklyCount,
+  monthlyCount,
+  detectedViolations,
+  reportedAccidents,
+  policeStation,
+  recentAccidents,
+} from "../data/DummyData";
+
 const Dashboard = () => {
   // card data
   const headerBgColor = "#616161";
@@ -28,41 +38,6 @@ const Dashboard = () => {
   const date = dayjs(new Date()).format("LL");
 
   // dummy data
-  const vehicleCount = [
-    { label: "Molpe Rd", value: 105 },
-    { label: "Mendis Ln", value: 55 },
-    { label: "Seevali Rd", value: 127 },
-    { label: "Katubedda", value: 178 },
-    { label: "Rawathawatta", value: 75 },
-    { label: "Ariyawansa Rd", value: 38 },
-  ];
-
-  const weeklyCount = [1, 5, 2, 0, 3, 2, 4];
-  const monthlyCount = [10, 13, 24, 6, 12, 2, 20, 11, 14, 17, 4, 9];
-
-  const detectedViolations = 5;
-  const reportedAccidents = 3;
-
-  const policeStation = "Moratumulla";
-
-  const recentAccidents = [
-    {
-      id: 1,
-      location: "Rawathawatta",
-      date: "04/09/2023",
-      time: "04:11 PM",
-    },
-    {
-      id: 2,
-      location: "Molpe Rd",
-      date: "04/09/2023",
-      time: "08:30 AM",
-    },
-    { id: 3, location: "Seevali Rd", date: "03/09/2023", time: "10:20 PM" },
-    { id: 4, location: "Ariyawansa Rd", date: "02/09/2023", time: "11:45 AM" },
-    { id: 5, location: "Mendis Ln", date: "02/09/2023", time: "07:15 AM" },
-    { id: 6, location: "Molpe Rd", date: "02/09/2023", time: "04:20 AM" },
-  ];
 
   return (
     <Box>

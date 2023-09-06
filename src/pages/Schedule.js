@@ -33,6 +33,8 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 import dayjs from "dayjs";
 
+import { data } from "../data/DummyData";
+
 // table colors
 const mainHeader = "#424242";
 const mainRow = "#EEEEEE";
@@ -185,123 +187,6 @@ const Schedule = () => {
       console.log(officerId, location, shift, date);
     }
   };
-
-  // dummy data
-  const data = [
-    {
-      location: "Rawathawatta",
-      dayShift: 2,
-      nightShift: 1,
-      officers: [
-        {
-          officerId: "SLP-12345",
-          name: "Gunapala",
-          dayShift: true,
-          telephone: "0716843954",
-        },
-        {
-          officerId: "SLP-29673",
-          name: "Siripala",
-          dayShift: true,
-          telephone: "0746849521",
-        },
-        {
-          officerId: "SLP-78621",
-          name: "Amal",
-          dayShift: false,
-          telephone: "0729846751",
-        },
-      ],
-    },
-    {
-      location: "Molpe Rd",
-      dayShift: 3,
-      nightShift: 2,
-      officers: [
-        {
-          officerId: "SLP-12345",
-          name: "Gunapala",
-          dayShift: false,
-          telephone: "0716843954",
-        },
-        {
-          officerId: "SLP-29673",
-          name: "Siripala",
-          dayShift: false,
-          telephone: "0746849521",
-        },
-        {
-          officerId: "SLP-78621",
-          name: "Amal",
-          dayShift: true,
-          telephone: "0729846751",
-        },
-        {
-          officerId: "SLP-75126",
-          name: "Kamal",
-          dayShift: true,
-          telephone: "0789645214",
-        },
-        {
-          officerId: "SLP-45621",
-          name: "Silva",
-          dayShift: true,
-          telephone: "0718956423",
-        },
-      ],
-    },
-    {
-      location: "Mendis Ln",
-      dayShift: 1,
-      nightShift: 1,
-      officers: [
-        {
-          officerId: "SLP-75126",
-          name: "Kamal",
-          dayShift: true,
-          telephone: "0789645214",
-        },
-        {
-          officerId: "SLP-45621",
-          name: "Silva",
-          dayShift: false,
-          telephone: "0718956423",
-        },
-      ],
-    },
-    {
-      location: "Seevali Rd",
-      dayShift: 1,
-      nightShift: 0,
-      officers: [
-        {
-          officerId: "SLP-45621",
-          name: "Silva",
-          dayShift: true,
-          telephone: "0718956423",
-        },
-      ],
-    },
-    {
-      location: "Ariyawansa Rd",
-      dayShift: 0,
-      nightShift: 1,
-      officers: [
-        {
-          officerId: "SLP-75126",
-          name: "Kamal",
-          dayShift: false,
-          telephone: "0789645214",
-        },
-      ],
-    },
-    {
-      location: "Katubedda",
-      dayShift: 0,
-      nightShift: 0,
-      officers: [],
-    },
-  ];
 
   return (
     <Container>
