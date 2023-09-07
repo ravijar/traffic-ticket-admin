@@ -1,5 +1,9 @@
 // reports page
 
+export const searchValue = (data, attribute, value)=>(
+  data.filter((datum)=>(datum[attribute] === value))
+)
+
 export const policeOfficersRows = [
   {
     officerId: "SLP-75834",
