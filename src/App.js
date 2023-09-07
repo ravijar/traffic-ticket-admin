@@ -14,6 +14,7 @@ import Review from "./pages/Review";
 import Reports from "./pages/Reports";
 import Schedule from "./pages/Schedule";
 import Register from "./pages/Register";
+import ReviewItem from "./pages/ReviewItem";
 
 const theme = createTheme({
   palette: {
@@ -29,7 +30,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Navigation />}>
       <Route index element={<Dashboard />} />
-      <Route path="review" element={<Review />} />
+      <Route path="review" element={<Review />}>
+        <Route path=":violationId" element={<ReviewItem />} />
+      </Route>
       <Route path="reports" element={<Reports />} />
       <Route path="schedule" element={<Schedule />} />
       <Route path="register" element={<Register />} />
