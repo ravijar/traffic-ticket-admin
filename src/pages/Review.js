@@ -44,14 +44,17 @@ const Review = () => {
               }
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography sx={{ width: "25%" }}>{row.vehicleNo}</Typography>
-                <Typography sx={{ width: "25%", color: "text.secondary" }}>
+                <Typography sx={{ width: "20%" }}>{row.vehicleNo}</Typography>
+                <Typography sx={{ width: "20%", color: "text.secondary" }}>
                   {row.location}
                 </Typography>
-                <Typography sx={{ width: "25%", color: "text.secondary" }}>
+                <Typography sx={{ width: "20%", color: "text.secondary" }}>
+                  {row.violation}
+                </Typography>
+                <Typography sx={{ width: "20%", color: "text.secondary" }}>
                   {row.date}
                 </Typography>
-                <Typography sx={{ width: "25%", color: "text.secondary" }}>
+                <Typography sx={{ width: "20%", color: "text.secondary" }}>
                   {row.time}
                 </Typography>
               </AccordionSummary>

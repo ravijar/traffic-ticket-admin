@@ -566,10 +566,11 @@ export const finesRows = [
 
 // review page
 
-function createData(id, vehicleNo, location, date, time) {
+function createData(id, vehicleNo, violation, location, date, time) {
   return {
     id,
     vehicleNo,
+    violation,
     location,
     date,
     time,
@@ -577,36 +578,49 @@ function createData(id, vehicleNo, location, date, time) {
 }
 
 export const rows = [
-  createData(1, "XYZ 1769", "Rawathawatta Rd", "2023/09/03", "06:30 AM"),
-  createData(2, "ABC 5678", "Molpe Rd", "2023/09/04", "07:45 AM"),
-  createData(3, "DEF 9012", "Seevali Rd", "2023/09/05", "08:15 AM"),
-  createData(4, "GHI 3456", "Katubedda", "2023/09/06", "09:30 AM"),
-  createData(5, "JKL 7890", "Ariyasena Rd", "2023/09/07", "10:45 AM"),
-  createData(6, "MNO 2345", "Mendis Ln", "2023/09/08", "11:00 AM"),
-  createData(7, "PQR 1769", "Rawathawatta Rd", "2023/09/09", "06:30 AM"),
-  createData(8, "STU 5678", "Molpe Rd", "2023/09/10", "07:45 AM"),
-  createData(9, "VWX 9012", "Seevali Rd", "2023/09/11", "08:15 AM"),
-  createData(10, "YZA 3456", "Katubedda", "2023/09/12", "09:30 AM"),
-  createData(11, "BCD 7890", "Ariyasena Rd", "2023/09/13", "10:45 AM"),
-  createData(12, "EFG 2345", "Mendis Ln", "2023/09/14", "11:00 AM"),
-  createData(13, "HIJ 1769", "Rawathawatta Rd", "2023/09/15", "06:30 AM"),
-  createData(14, "KLM 5678", "Molpe Rd", "2023/09/16", "07:45 AM"),
-  createData(15, "NOP 9012", "Seevali Rd", "2023/09/17", "08:15 AM"),
-  createData(16, "QRS 3456", "Katubedda", "2023/09/18", "09:30 AM"),
-  createData(17, "TUV 7890", "Ariyasena Rd", "2023/09/19", "10:45 AM"),
-  createData(18, "WXY 2345", "Mendis Ln", "2023/09/20", "11:00 AM"),
-  createData(19, "ZAB 1769", "Rawathawatta Rd", "2023/09/21", "06:30 AM"),
-  createData(20, "CDE 5678", "Molpe Rd", "2023/09/22", "07:45 AM"),
-  createData(21, "FGH 9012", "Seevali Rd", "2023/09/23", "08:15 AM"),
-  createData(22, "IJK 3456", "Katubedda", "2023/09/24", "09:30 AM"),
-  createData(23, "LMN 7890", "Ariyasena Rd", "2023/09/25", "10:45 AM"),
-  createData(24, "OPQ 2345", "Mendis Ln", "2023/09/26", "11:00 AM"),
-  createData(25, "RST 1769", "Rawathawatta Rd", "2023/09/27", "06:30 AM"),
-  createData(26, "UVW 5678", "Molpe Rd", "2023/09/28", "07:45 AM"),
-  createData(27, "XYZ 9012", "Seevali Rd", "2023/09/29", "08:15 AM"),
-  createData(28, "ABC 3456", "Katubedda", "2023/09/30", "09:30 AM"),
+  createData(
+    1,
+    "CAR8769",
+    "High Speed",
+    "Rawathawatta Rd",
+    "2023/09/03",
+    "06:30 AM"
+  ),
+  createData(2, "BGA5969", "High Speed", "Molpe Rd", "2023/09/04", "07:45 AM"),
+  createData(3, "KO6216", "High Speed", "Seevali Rd", "2023/09/05", "08:15 AM"),
+  createData(4, "AAN3508", "High Speed", "Katubedda", "2023/09/06", "09:30 AM"),
 ];
 
+export const reviewDetails = [
+  {
+    id: 1,
+    vehicleNo: "CAR8769",
+    originalImage: "/dummy_data/originals/1.jpg",
+    vehicleImage: "/dummy_data/vehicles/1.jpg",
+    licensePlateImage: "/dummy_data/licenses/1.jpg",
+  },
+  {
+    id: 1,
+    vehicleNo: "BGA5969",
+    originalImage: "/dummy_data/originals/2.jpg",
+    vehicleImage: "/dummy_data/vehicles/2.jpg",
+    licensePlateImage: "/dummy_data/licenses/2.jpg",
+  },
+  {
+    id: 1,
+    vehicleNo: "KO6216",
+    originalImage: "/dummy_data/originals/3.jpg",
+    vehicleImage: "/dummy_data/vehicles/3.jpg",
+    licensePlateImage: "/dummy_data/licenses/3.jpg",
+  },
+  {
+    id: 1,
+    vehicleNo: "AAN3508",
+    originalImage: "/dummy_data/originals/4.jpg",
+    vehicleImage: "/dummy_data/vehicles/4.jpg",
+    licensePlateImage: "/dummy_data/licenses/4.jpg",
+  },
+];
 // schedule page
 
 export const data = [
