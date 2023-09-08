@@ -27,9 +27,9 @@ import {
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.5),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.75),
   },
   marginLeft: 0,
   width: "100%",
@@ -168,7 +168,9 @@ const Reports = () => {
   const [attribute, setAttribute] = useState("");
   const [attributeError, setAttributeError] = useState(false);
   const [input, setInput] = useState("");
+  const [rows, setRows] = useState(accidentsRows);
 
+  // handlers
   const handleTab = (event, value) => {
     setTab(value);
     setAttribute("");
@@ -188,12 +190,9 @@ const Reports = () => {
 
   const handleSearch = (event) => {
     if (event.key === "Enter") {
-      console.log("enter", attribute);
       if (attribute !== "") {
         if (input !== "") {
-          console.log("logic working");
-          rows = searchValue(rows, attribute, input);
-          console.log(rows);
+          setRows(searchValue(rows, attribute, input));
         }
       } else {
         setAttributeError(true);
@@ -201,43 +200,58 @@ const Reports = () => {
     }
   };
 
+  // updating rows to default values after a search
+  useEffect(() => {
+    if (input === "") {
+      switch (tab) {
+        case "policeOfficers":
+          setRows(policeOfficersRows);
+          break;
+        case "fines":
+          setRows(finesRows);
+          break;
+        case "drivers":
+          setRows(driversRows);
+          break;
+        default:
+          setRows(accidentsRows);
+          break;
+      }
+    }
+  }, [input, tab]);
+
   // table parameters
   let orderBy = "date";
   let tableTitle = "Accidents";
-  let headCells = { accidentsHead };
-  let rows = { accidentsRows };
+  let headCells = accidentsHead;
 
   switch (tab) {
     case "policeOfficers": {
       orderBy = "officerId";
       tableTitle = "Police Officers";
       headCells = policeOfficersHead;
-      rows = policeOfficersRows;
       break;
     }
     case "fines": {
       orderBy = "finesId";
       tableTitle = "Fines";
       headCells = finesHead;
-      rows = finesRows;
       break;
     }
     case "drivers": {
       orderBy = "nic";
       tableTitle = "Drivers";
       headCells = driversHead;
-      rows = driversRows;
       break;
     }
     default: {
       orderBy = "date";
       tableTitle = "Accidents";
       headCells = accidentsHead;
-      rows = accidentsRows;
       break;
     }
   }
-  console.log(orderBy);
+
   return (
     <Container>
       {/* tabs */}
@@ -286,27 +300,37 @@ const Reports = () => {
 
         {/* search section */}
         <Grid item xs={12} md={3}>
-          <FormControl sx={{ m: 1, width: "100%" }} error={attributeError}>
-            <InputLabel>Attribute</InputLabel>
-            <Select label="Attribute" value={attribute} onChange={handleSelect}>
-              <MenuItem value="">None</MenuItem>
-              {headCells.map((menuItem) => (
-                <MenuItem key={menuItem.id} value={menuItem.id}>
-                  {menuItem.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search..."
-              onKeyDown={handleSearch}
-              onChange={handleInput}
-            />
-          </Search>
+          <Box sx={{ bgcolor: "#DEDEDE", padding: 3 }}>
+            <FormControl
+              sx={{ marginBottom: 3, width: "100%" }}
+              error={attributeError}
+            >
+              <InputLabel>Attribute</InputLabel>
+              <Select
+                label="Attribute"
+                value={attribute}
+                onChange={handleSelect}
+              >
+                <MenuItem value="">None</MenuItem>
+                {headCells.map((menuItem) => (
+                  <MenuItem key={menuItem.id} value={menuItem.id}>
+                    {menuItem.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search..."
+                onKeyDown={handleSearch}
+                onChange={handleInput}
+                value={input}
+              />
+            </Search>
+          </Box>
         </Grid>
       </Grid>
     </Container>

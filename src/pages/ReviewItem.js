@@ -50,6 +50,7 @@ const ReviewItem = () => {
                 <img
                   src={reviewDetails[violationId - 1].vehicleImage}
                   width="100%"
+                  alt="vehicle"
                 />
               </CardContent>
             </Card>
@@ -69,6 +70,7 @@ const ReviewItem = () => {
                 <img
                   src={reviewDetails[violationId - 1].licensePlateImage}
                   width="100%"
+                  alt="license plate"
                 />
                 <TextField
                   label="Detected License Plate"
@@ -112,6 +114,7 @@ const ReviewItem = () => {
                 <img
                   src={reviewDetails[violationId - 1].originalImage}
                   width="100%"
+                  alt="original"
                 />
               </CardContent>
             </Card>
