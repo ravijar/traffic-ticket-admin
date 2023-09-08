@@ -15,6 +15,7 @@ import Reports from "./pages/Reports";
 import Schedule from "./pages/Schedule";
 import Register from "./pages/Register";
 import ReviewItem from "./pages/ReviewItem";
+import Login from "./pages/Login";
 
 const theme = createTheme({
   palette: {
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
       <Route path="reports" element={<Reports />} />
       <Route path="schedule" element={<Schedule />} />
       <Route path="register" element={<Register />} />
+      <Route path="login" element={<Login />} />
     </Route>
   )
 );
