@@ -1,9 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import "./App.css";
@@ -27,25 +22,25 @@ const theme = createTheme({
   },
 });
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Navigation />}>
-      <Route index element={<Dashboard />} />
-      <Route path="review" element={<Review />}>
-        <Route path=":violationId" element={<ReviewItem />} />
-      </Route>
-      <Route path="reports" element={<Reports />} />
-      <Route path="schedule" element={<Schedule />} />
-      <Route path="register" element={<Register />} />
-      <Route path="login" element={<Login />} />
-    </Route>
-  )
-);
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route element={<Navigation />}>
+              <Route index element={<Dashboard />} />
+              <Route path="review" element={<Review />}>
+                <Route path=":violationId" element={<ReviewItem />} />
+              </Route>
+              <Route path="reports" element={<Reports />} />
+              <Route path="schedule" element={<Schedule />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+            <Route path="login" element={<Login />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
