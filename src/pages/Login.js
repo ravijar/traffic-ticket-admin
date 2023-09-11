@@ -144,7 +144,6 @@ const Login = () => {
           </Grid>
         </Grid>
       </Container>
-      {console.log(userName, password)}
     </Box>
   );
 };
