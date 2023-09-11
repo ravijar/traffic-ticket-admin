@@ -11,6 +11,8 @@ import Schedule from "./pages/Schedule";
 import Register from "./pages/Register";
 import ReviewItem from "./pages/ReviewItem";
 import Login from "./pages/Login";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoutes from "./utils/PrivateRoutes";
 
 const theme = createTheme({
   palette: {
@@ -26,20 +28,24 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route element={<Navigation />}>
-              <Route index element={<Dashboard />} />
-              <Route path="review" element={<Review />}>
-                <Route path=":violationId" element={<ReviewItem />} />
+        <AuthProvider>
+          <Routes>
+            <Route path="/">
+              <Route element={<PrivateRoutes />}>
+                <Route element={<Navigation />}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="review" element={<Review />}>
+                    <Route path=":violationId" element={<ReviewItem />} />
+                  </Route>
+                  <Route path="reports" element={<Reports />} />
+                  <Route path="schedule" element={<Schedule />} />
+                  <Route path="register" element={<Register />} />
+                </Route>
               </Route>
-              <Route path="reports" element={<Reports />} />
-              <Route path="schedule" element={<Schedule />} />
-              <Route path="register" element={<Register />} />
+              <Route path="login" element={<Login />} />
             </Route>
-            <Route path="login" element={<Login />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

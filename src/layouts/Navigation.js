@@ -17,6 +17,8 @@ import ReportsIcon from "@mui/icons-material/Leaderboard";
 import ScheduleIcon from "@mui/icons-material/PendingActions";
 import RegisterIcon from "@mui/icons-material/PersonAddAlt1";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const drawerWidth = 160;
 const appBarHeight = 64;
@@ -24,6 +26,7 @@ const appBarHeight = 64;
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { logoutUser } = useContext(AuthContext);
 
   const drawerItems = [
     {
@@ -105,8 +108,11 @@ const Navigation = () => {
               </ListItemButton>
             </ListItem>
           ))}
-          <ListItem disablePadding sx={{marginBottom:'10px', position: "absolute", bottom: "0" }}>
-            <ListItemButton >
+          <ListItem
+            disablePadding
+            sx={{ marginBottom: "10px", position: "absolute", bottom: "0" }}
+          >
+            <ListItemButton onClick={logoutUser}>
               <ListItemIcon style={{ minWidth: "40px" }}>
                 <LogoutIcon />
               </ListItemIcon>
@@ -122,8 +128,8 @@ const Navigation = () => {
           background: "#f2f2f2",
           flexGrow: 1,
           height: "100%",
-          minHeight : '100vh',
-          boxSizing:'border-box',
+          minHeight: "100vh",
+          boxSizing: "border-box",
           padding: (theme) => theme.spacing(2),
         }}
       >

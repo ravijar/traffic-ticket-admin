@@ -11,19 +11,29 @@ import {
   TextField,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginUser(userName, password);
+  };
+
+  const { loginUser } = useContext(AuthContext);
 
   const theme = useTheme();
 
@@ -80,47 +90,61 @@ const Login = () => {
               paddingLeft={5}
               paddingRight={5}
             >
-              <TextField
-                label="User ID"
-                fullWidth
-                variant="outlined"
-                sx={{ m: 1 }}
-                size="small"
-              />
-              <FormControl
-                variant="outlined"
-                fullWidth
-                sx={{ m: 1 }}
-                size="small"
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  label="User ID"
+                  fullWidth
+                  variant="outlined"
+                  sx={{ m: 1 }}
+                  size="small"
+                  onChange={(e) => {
+                    setUserName(e.target.value);
+                  }}
                 />
-              </FormControl>
-              <Button fullWidth variant="contained" sx={{ m: 1 }}>
-                Login
-              </Button>
+                <FormControl
+                  variant="outlined"
+                  fullWidth
+                  sx={{ m: 1 }}
+                  size="small"
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </FormControl>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ m: 1 }}
+                  type="submit"
+                >
+                  Login
+                </Button>
+              </form>
             </Box>
           </Grid>
         </Grid>
       </Container>
+      {console.log(userName, password)}
     </Box>
   );
 };
