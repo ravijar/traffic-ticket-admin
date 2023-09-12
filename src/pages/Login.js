@@ -90,56 +90,54 @@ const Login = () => {
               paddingLeft={5}
               paddingRight={5}
             >
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  label="User ID"
-                  fullWidth
-                  variant="outlined"
-                  sx={{ m: 1 }}
-                  size="small"
+              <TextField
+                label="User ID"
+                fullWidth
+                variant="outlined"
+                sx={{ m: 1 }}
+                size="small"
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+              />
+              <FormControl
+                variant="outlined"
+                fullWidth
+                sx={{ m: 1 }}
+                size="small"
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
                   onChange={(e) => {
-                    setUserName(e.target.value);
+                    setPassword(e.target.value);
                   }}
                 />
-                <FormControl
-                  variant="outlined"
-                  fullWidth
-                  sx={{ m: 1 }}
-                  size="small"
-                >
-                  <InputLabel htmlFor="outlined-adornment-password">
-                    Password
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                </FormControl>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{ m: 1 }}
-                  type="submit"
-                >
-                  Login
-                </Button>
-              </form>
+              </FormControl>
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ m: 1 }}
+                onClick={handleSubmit}
+              >
+                Login
+              </Button>
             </Box>
           </Grid>
         </Grid>

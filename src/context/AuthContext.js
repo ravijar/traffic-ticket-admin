@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       ? jwt_decode(localStorage.getItem("authTokens"))
       : null
   );
-  let [loading, setLoading] = useState(true);
+  let [loading, setLoading] = useState(false);
 
   let navigate = useNavigate();
 
@@ -39,6 +39,8 @@ export const AuthProvider = ({ children }) => {
       setUser(jwt_decode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
       navigate("/");
+    } else if (response.status === 401) {
+      alert("Invalid credentials!");
     } else {
       alert("Something went wrong!");
     }
