@@ -11,6 +11,7 @@ import {
   Chip,
   Button,
 } from "@mui/material";
+import axios from "axios";
 
 const Register = () => {
   // text field values
@@ -83,6 +84,38 @@ const Register = () => {
         password,
         confirmPassword
       );
+      if (password === confirmPassword) {
+        return new Promise((resolve, reject) => {
+          axios
+            .post("http://localhost:8000/api/users/officer_signup/", {
+              first_name: firstName,
+              last_name: lastName,
+              nic: nic,
+              telephone: telephone,
+              police_station: policeStation,
+              password: password,
+              officer_id: officerId,
+            })
+
+            .then(() => {
+              alert("Officer successfully registered!");
+              setFirstName("");
+              setLastName("");
+              setNic("");
+              setTelephone("");
+              setOfficerId("");
+              setPoliceStation("");
+              setPassword("");
+              setConfirmPassword("");
+            })
+            .catch((error) => {
+              alert("Officer registration failed!");
+              reject(error);
+            });
+        });
+      } else {
+        alert("Passwords do not match!");
+      }
     }
   };
 
@@ -112,6 +145,7 @@ const Register = () => {
                       fullWidth
                       required
                       error={firstNameError}
+                      value={firstName}
                     />
                     <TextField
                       sx={{ marginBottom: 3, marginLeft: 1 }}
@@ -124,6 +158,7 @@ const Register = () => {
                       fullWidth
                       required
                       error={lastNameError}
+                      value={lastName}
                     />
                   </Box>
                   <TextField
@@ -137,6 +172,7 @@ const Register = () => {
                     fullWidth
                     required
                     error={nicError}
+                    value={nic}
                   />
                   <TextField
                     sx={{ marginBottom: 4, width: "50%" }}
@@ -148,6 +184,7 @@ const Register = () => {
                     variant="outlined"
                     required
                     error={telephoneError}
+                    value={telephone}
                   />
                   {/* official details */}
                   <Divider sx={{ marginBottom: 4 }}>
@@ -165,6 +202,7 @@ const Register = () => {
                       fullWidth
                       required
                       error={officerIdError}
+                      value={officerId}
                     />
                     <TextField
                       sx={{ marginBottom: 4, marginLeft: 1 }}
@@ -177,6 +215,7 @@ const Register = () => {
                       fullWidth
                       required
                       error={policeStationError}
+                      value={policeStation}
                     />
                   </Box>
                 </form>
@@ -202,6 +241,7 @@ const Register = () => {
                     fullWidth
                     required
                     error={passwordError}
+                    value={password}
                   />
                   <TextField
                     sx={{ marginBottom: 4 }}
@@ -214,6 +254,7 @@ const Register = () => {
                     fullWidth
                     required
                     error={confirmPasswordError}
+                    value={confirmPassword}
                   />
                   <Button
                     variant="contained"
