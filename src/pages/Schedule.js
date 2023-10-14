@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -33,8 +33,44 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 import dayjs from "dayjs";
 
-import { data } from "../data/DummyData";
 import axios from "axios";
+
+function transformData(inputData) {
+  const transformedData = [];
+
+  // Group data by location
+  const groupedData = {};
+  inputData.forEach((item) => {
+    if (!groupedData[item.location]) {
+      groupedData[item.location] = {
+        location: item.location,
+        dayShift: 0,
+        nightShift: 0,
+        officers: [],
+      };
+    }
+    // Count shifts
+    if (item.shift === "day") {
+      groupedData[item.location].dayShift++;
+    } else if (item.shift === "night") {
+      groupedData[item.location].nightShift++;
+    }
+    // Add officers
+    groupedData[item.location].officers.push({
+      name: item.full_name,
+      officerId: item.officer_id,
+      dayShift: item.shift === "day" ? true : false,
+      telephone: item.telephone,
+    });
+  });
+
+  // Convert the grouped data object into an array
+  for (const location in groupedData) {
+    transformedData.push(groupedData[location]);
+  }
+
+  return transformedData;
+}
 
 // table colors
 const mainHeader = "#424242";
@@ -167,10 +203,23 @@ const Schedule = () => {
   const [location, setLocation] = useState("");
   const [shift, setShift] = useState("day");
   const [date, setDate] = useState(dayjs(new Date()));
+  const [data, setData] = useState([]);
 
   // input errors
   const [officerIdError, setOfficerIdError] = useState(false);
   const [locationError, setLocationError] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/scheduledOfficers/${date.format("YYYY-MM-DD")}`)
+
+      .then((res) => {
+        setData(transformData(res.data.results));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [date]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
