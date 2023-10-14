@@ -34,6 +34,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 
 import { data } from "../data/DummyData";
+import axios from "axios";
 
 // table colors
 const mainHeader = "#424242";
@@ -185,6 +186,27 @@ const Schedule = () => {
     // submit action
     if (officerId && location) {
       console.log(officerId, location, shift, date);
+
+      return new Promise((resolve, reject) => {
+        axios
+          .post("http://localhost:8000/api/schedules/create_schedule/", {
+            officer_id: officerId,
+            location: location,
+            shift: shift,
+            date: `${date.format("YYYY-MM-DD")}`,
+          })
+
+          .then(() => {
+            alert("Schedule created!");
+            setLocation("");
+            setOfficerId("");
+            resolve();
+          })
+          .catch((error) => {
+            alert("Shedule not created!");
+            reject(error);
+          });
+      });
     }
   };
 
@@ -222,6 +244,7 @@ const Schedule = () => {
                     fullWidth
                     required
                     error={officerIdError}
+                    value={officerId}
                   />
                   <TextField
                     sx={{ marginBottom: 3 }}
@@ -234,6 +257,7 @@ const Schedule = () => {
                     fullWidth
                     required
                     error={locationError}
+                    value={location}
                   />
                   <FormControl sx={{ marginBottom: 4 }}>
                     <FormLabel>Select Shift</FormLabel>
