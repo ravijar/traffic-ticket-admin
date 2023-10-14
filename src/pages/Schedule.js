@@ -204,6 +204,7 @@ const Schedule = () => {
   const [shift, setShift] = useState("day");
   const [date, setDate] = useState(dayjs(new Date()));
   const [data, setData] = useState([]);
+  const [submit, setSubmit] = useState(false);
 
   // input errors
   const [officerIdError, setOfficerIdError] = useState(false);
@@ -211,7 +212,11 @@ const Schedule = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/scheduledOfficers/${date.format("YYYY-MM-DD")}`)
+      .get(
+        `http://localhost:8000/api/scheduledOfficers/${date.format(
+          "YYYY-MM-DD"
+        )}`
+      )
 
       .then((res) => {
         setData(transformData(res.data.results));
@@ -219,7 +224,7 @@ const Schedule = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [date]);
+  }, [date, submit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -234,8 +239,6 @@ const Schedule = () => {
 
     // submit action
     if (officerId && location) {
-      console.log(officerId, location, shift, date);
-
       return new Promise((resolve, reject) => {
         axios
           .post("http://localhost:8000/api/schedules/create_schedule/", {
@@ -246,6 +249,7 @@ const Schedule = () => {
           })
 
           .then(() => {
+            setSubmit(true);
             alert("Schedule created!");
             setLocation("");
             setOfficerId("");
@@ -255,6 +259,7 @@ const Schedule = () => {
             alert("Shedule not created!");
             reject(error);
           });
+        setSubmit(false);
       });
     }
   };
