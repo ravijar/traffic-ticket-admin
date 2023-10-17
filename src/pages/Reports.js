@@ -17,11 +17,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import EnhancedTable from "../components/EnhancedTable";
 import {
   accidentsRows,
-  policeOfficersRows,
   finesRows,
   driversRows,
   searchValue,
 } from "../data/DummyData";
+import axios from "axios";
 
 // search bar styles
 const Search = styled("div")(({ theme }) => ({
@@ -124,11 +124,11 @@ const Reports = () => {
 
   const policeOfficersHead = [
     {
-      id: "officerId",
+      id: "officer_id",
       label: "Officer ID",
     },
     {
-      id: "name",
+      id: "full_name",
       label: "Name",
     },
     {
@@ -136,7 +136,7 @@ const Reports = () => {
       label: "NIC",
     },
     {
-      id: "policeStation",
+      id: "police_station",
       label: "Police Station",
     },
     {
@@ -151,11 +151,11 @@ const Reports = () => {
       label: "NIC",
     },
     {
-      id: "name",
+      id: "full_name",
       label: "Name",
     },
     {
-      id: "vehicleNo",
+      id: "vehicle_number",
       label: "Vehicle No",
     },
     {
@@ -169,6 +169,18 @@ const Reports = () => {
   const [attributeError, setAttributeError] = useState(false);
   const [input, setInput] = useState("");
   const [rows, setRows] = useState(accidentsRows);
+
+  const fetchData = (attribute) => {
+    axios
+      .get(`http://localhost:8000/api/${attribute}/`)
+
+      .then((res) => {
+        setRows(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // handlers
   const handleTab = (event, value) => {
@@ -203,15 +215,16 @@ const Reports = () => {
   // updating rows to default values after a search
   useEffect(() => {
     if (input === "") {
+      setRows([]);
       switch (tab) {
         case "policeOfficers":
-          setRows(policeOfficersRows);
+          fetchData("policeofficers");
           break;
         case "fines":
           setRows(finesRows);
           break;
         case "drivers":
-          setRows(driversRows);
+          fetchData("vehicleowners");
           break;
         default:
           setRows(accidentsRows);
