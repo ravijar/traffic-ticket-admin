@@ -15,12 +15,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import SearchIcon from "@mui/icons-material/Search";
 import EnhancedTable from "../components/EnhancedTable";
-import {
-  accidentsRows,
-  finesRows,
-  driversRows,
-  searchValue,
-} from "../data/DummyData";
+import { searchValue } from "../data/DummyData";
 import axios from "axios";
 
 // search bar styles
@@ -82,6 +77,10 @@ const Reports = () => {
       label: "Time",
     },
     {
+      id: "description",
+      label: "Description",
+    },
+    {
       id: "vehicleNos",
       label: "Related Vehicles",
     },
@@ -89,15 +88,15 @@ const Reports = () => {
 
   const finesHead = [
     {
-      id: "fineId",
+      id: "fine_id",
       label: "Fine ID",
     },
     {
-      id: "driverNic",
+      id: "driver_nic",
       label: "Driver NIC",
     },
     {
-      id: "vehicleNo",
+      id: "vehicle_number",
       label: "Vehicle No",
     },
     {
@@ -113,11 +112,15 @@ const Reports = () => {
       label: "Time",
     },
     {
-      id: "violation",
+      id: "violation_type",
       label: "Violation",
     },
     {
-      id: "paymentStatus",
+      id: "due_date",
+      label: "Due Date",
+    },
+    {
+      id: "payment",
       label: "Payment Status",
     },
   ];
@@ -168,7 +171,7 @@ const Reports = () => {
   const [attribute, setAttribute] = useState("");
   const [attributeError, setAttributeError] = useState(false);
   const [input, setInput] = useState("");
-  const [rows, setRows] = useState(accidentsRows);
+  const [rows, setRows] = useState([]);
 
   const fetchData = (attribute) => {
     axios
@@ -221,13 +224,13 @@ const Reports = () => {
           fetchData("policeofficers");
           break;
         case "fines":
-          setRows(finesRows);
+          fetchData("fines");
           break;
         case "drivers":
           fetchData("vehicleowners");
           break;
         default:
-          setRows(accidentsRows);
+          fetchData("accidents");
           break;
       }
     }
