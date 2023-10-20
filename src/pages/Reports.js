@@ -227,7 +227,7 @@ const Reports = () => {
           fetchData("fines");
           break;
         case "drivers":
-          fetchData("vehicleowners");
+          fetchData("drivers");
           break;
         default:
           fetchData("accidents");
