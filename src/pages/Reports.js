@@ -81,7 +81,7 @@ const Reports = () => {
       label: "Description",
     },
     {
-      id: "vehicleNos",
+      id: "vehicles",
       label: "Related Vehicles",
     },
   ];

@@ -212,14 +212,12 @@ const Schedule = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8000/api/scheduledOfficers/${date.format(
-          "YYYY-MM-DD"
-        )}`
-      )
+      .get("http://localhost:8000/api/schedules/get_scheduled_officers/", {
+        params: { date: date.format("YYYY-MM-DD") },
+      })
 
       .then((res) => {
-        setData(transformData(res.data.results));
+        setData(transformData(res.data));
       })
       .catch((err) => {
         console.log(err);
