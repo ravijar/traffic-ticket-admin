@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 
 const Register = () => {
+  // register officer
   // text field values
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -34,7 +35,27 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
-  const handleSubmit = (e) => {
+  // register officer location
+  // text field values
+  const [officerPoliceStation, setOfficerPoliceStation] = useState("");
+  const [officerLocation, setOfficerLocation] = useState("");
+
+  // text field errors
+  const [officerPoliceStationError, setOfficerPoliceStationError] =
+    useState(false);
+  const [officerLocationError, setOfficerLocationError] = useState(false);
+
+  // register camera location
+  // text field values
+  const [cameraPoliceStation, setCameraPoliceStation] = useState("");
+  const [cameraLocation, setCameraLocation] = useState("");
+
+  // text field errors
+  const [cameraPoliceStationError, setCameraPoliceStationError] =
+    useState(false);
+  const [cameraLocationError, setCameraLocationError] = useState(false);
+
+  const handleOfficerRegister = (e) => {
     e.preventDefault();
 
     // checking for empty text fields
@@ -119,16 +140,84 @@ const Register = () => {
     }
   };
 
+  const handleOfficerLocationRegister = (e) => {
+    e.preventDefault();
+
+    // checking for empty text fields
+    if (officerPoliceStation === "") {
+      setOfficerPoliceStationError(true);
+    }
+    if (officerLocation === "") {
+      setOfficerLocationError(true);
+    }
+
+    // submit action
+    if (officerPoliceStation && officerLocation) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post("http://localhost:8000/api/officerlocations/", {
+            police_station: officerPoliceStation,
+            location: officerLocation,
+          })
+          .then(() => {
+            alert("Location successfully registered!");
+            setOfficerPoliceStation("");
+            setOfficerLocation("");
+          })
+          .catch((error) => {
+            alert("Location registration failed!");
+            reject(error);
+          });
+      });
+    }
+  };
+
+  const handleCameraLocationRegister = (e) => {
+    e.preventDefault();
+
+    // checking for empty text fields
+    if (cameraPoliceStation === "") {
+      setCameraPoliceStationError(true);
+    }
+    if (cameraLocation === "") {
+      setCameraLocationError(true);
+    }
+
+    // submit action
+    if (cameraPoliceStation && cameraLocation) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post("http://localhost:8000/api/camerlocations/", {
+            police_station: cameraPoliceStation,
+            location: cameraLocation,
+          })
+          .then(() => {
+            alert("Location successfully registered!");
+            setCameraLocation("");
+            setCameraPoliceStation("");
+          })
+          .catch((error) => {
+            alert("Location registration failed!");
+            reject(error);
+          });
+      });
+    }
+  };
+
   return (
     <Container>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
-          {/* officer details */}
+          {/* officer register */}
           <Card>
             <Container>
               <CardHeader title="REGISTER OFFICER" />
               <CardContent>
-                <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                <form
+                  onSubmit={handleOfficerRegister}
+                  noValidate
+                  autoComplete="off"
+                >
                   {/* personal details */}
                   <Divider sx={{ marginBottom: 2 }}>
                     <Chip label="Personal Details" size="small" />
@@ -230,7 +319,7 @@ const Register = () => {
                   </Divider>
                   <Box sx={{ display: "flex" }}>
                     <TextField
-                      sx={{ marginBottom: 2 , marginRight: 1 }}
+                      sx={{ marginBottom: 2, marginRight: 1 }}
                       onChange={(e) => {
                         setPassword(e.target.value);
                         setPasswordError(false);
@@ -244,7 +333,7 @@ const Register = () => {
                       size="small"
                     />
                     <TextField
-                      sx={{ marginBottom: 4 , marginLeft: 1 }}
+                      sx={{ marginBottom: 4, marginLeft: 1 }}
                       onChange={(e) => {
                         setConfirmPassword(e.target.value);
                         setConfirmPasswordError(false);
@@ -258,63 +347,122 @@ const Register = () => {
                       size="small"
                     />
                   </Box>
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      fullWidth
-                      size="small"
-                      sx={{ marginBottom: 2 ,padding:1}}
-                    >
-                      Register Officer
-                    </Button>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    size="small"
+                    sx={{ marginBottom: 2, padding: 1 }}
+                  >
+                    Register Officer
+                  </Button>
                 </form>
               </CardContent>
             </Container>
           </Card>
         </Grid>
         <Grid item xs={12} md={6}>
+          {/* location register */}
           <Card>
             <Container>
-              {/* credentials */}
-              <CardHeader title="Credentials" />
+              <CardHeader title="REGISTER LOCATION" />
               <CardContent>
-                <form>
-                  <TextField
-                    sx={{ marginBottom: 3 }}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      setPasswordError(false);
-                    }}
-                    label="Password"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    error={passwordError}
-                    value={password}
-                    size="small"
-                  />
-                  <TextField
-                    sx={{ marginBottom: 4 }}
-                    onChange={(e) => {
-                      setConfirmPassword(e.target.value);
-                      setConfirmPasswordError(false);
-                    }}
-                    label="Confirm Password"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    error={confirmPasswordError}
-                    value={confirmPassword}
-                    size="small"
-                  />
+                {/* officer location details */}
+                <form
+                  onSubmit={handleOfficerLocationRegister}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <Divider sx={{ marginBottom: 2 }}>
+                    <Chip label="Officer Location" size="small" />
+                  </Divider>
+                  <Box sx={{ display: "flex" }}>
+                    <TextField
+                      sx={{ marginBottom: 2, marginRight: 1 }}
+                      onChange={(e) => {
+                        setOfficerPoliceStation(e.target.value);
+                        setOfficerPoliceStationError(false);
+                      }}
+                      label="Police Station"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={officerPoliceStationError}
+                      value={officerPoliceStation}
+                      size="small"
+                    />
+                    <TextField
+                      sx={{ marginBottom: 4, marginLeft: 1 }}
+                      onChange={(e) => {
+                        setOfficerLocation(e.target.value);
+                        setOfficerLocationError(false);
+                      }}
+                      label="Location"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={officerLocationError}
+                      value={officerLocation}
+                      size="small"
+                    />
+                  </Box>
                   <Button
                     variant="contained"
                     type="submit"
                     fullWidth
                     size="small"
-                    sx={{ marginBottom: 4 }}
+                    sx={{ marginBottom: 4, padding: 1 }}
                   >
-                    Register Officer
+                    Register Officer location
+                  </Button>
+                </form>
+                {/* camera location details */}
+                <form
+                  onSubmit={handleCameraLocationRegister}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <Divider sx={{ marginBottom: 2 }}>
+                    <Chip label="Camera Location" size="small" />
+                  </Divider>
+                  <Box sx={{ display: "flex" }}>
+                    <TextField
+                      sx={{ marginBottom: 2, marginRight: 1 }}
+                      onChange={(e) => {
+                        setCameraPoliceStation(e.target.value);
+                        setCameraPoliceStationError(false);
+                      }}
+                      label="Police Station"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={cameraPoliceStationError}
+                      value={cameraPoliceStation}
+                      size="small"
+                    />
+                    <TextField
+                      sx={{ marginBottom: 4, marginLeft: 1 }}
+                      onChange={(e) => {
+                        setCameraLocation(e.target.value);
+                        setCameraLocationError(false);
+                      }}
+                      label="Location"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={cameraLocationError}
+                      value={cameraLocation}
+                      size="small"
+                    />
+                  </Box>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    size="small"
+                    sx={{ marginBottom: 4, padding: 1 }}
+                  >
+                    Register camera location
                   </Button>
                 </form>
               </CardContent>
