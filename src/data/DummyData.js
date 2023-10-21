@@ -72,29 +72,6 @@ export const vehicleCount = [
   { label: "Ariyawansa Rd", value: 38 },
 ];
 
-export const weeklyCount = [1, 5, 2, 0, 3, 2, 4];
-export const monthlyCount = [10, 13, 24, 6, 12, 2, 20, 11, 14, 17, 4, 9];
-
 export const detectedViolations = 5;
-export const reportedAccidents = 3;
 
 export const policeStation = "Moratumulla";
-
-export const recentAccidents = [
-  {
-    id: 1,
-    location: "Rawathawatta",
-    date: "04/09/2023",
-    time: "04:11 PM",
-  },
-  {
-    id: 2,
-    location: "Molpe Rd",
-    date: "04/09/2023",
-    time: "08:30 AM",
-  },
-  { id: 3, location: "Seevali Rd", date: "03/09/2023", time: "10:20 PM" },
-  { id: 4, location: "Ariyawansa Rd", date: "02/09/2023", time: "11:45 AM" },
-  { id: 5, location: "Mendis Ln", date: "02/09/2023", time: "07:15 AM" },
-  { id: 6, location: "Molpe Rd", date: "02/09/2023", time: "04:20 AM" },
-];

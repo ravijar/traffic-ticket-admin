@@ -18,13 +18,11 @@ import dayjs from "dayjs";
 
 import {
   vehicleCount,
-  weeklyCount,
-  monthlyCount,
   detectedViolations,
-  reportedAccidents,
   policeStation,
-  recentAccidents,
 } from "../data/DummyData";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Dashboard = () => {
   // card data
@@ -37,7 +35,58 @@ const Dashboard = () => {
 
   const date = dayjs(new Date()).format("LL");
 
-  // dummy data
+  const [recentAccidents, setRecentAccidents] = useState([]);
+  const [monthlyCount, setMonthlyCount] = useState([
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]);
+  const [weeklyCount, setWeeklyCount] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const [reportedAccidents, setReportedAccidents] = useState(0);
+
+  useEffect(() => {
+    // fetching recent accidents
+    axios
+      .get("http://localhost:8000/api/accidents/get_recent_accidents/")
+
+      .then((res) => {
+        setRecentAccidents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // fetching monthly count
+    axios
+      .get("http://localhost:8000/api/accidents/get_monthly_count/")
+
+      .then((res) => {
+        setMonthlyCount(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // fetching weekly count
+    axios
+      .get("http://localhost:8000/api/accidents/get_weekly_count/")
+
+      .then((res) => {
+        setWeeklyCount(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      // fetching reported accident coutn
+      axios
+      .get("http://localhost:8000/api/accidents/get_reported_accident_count/")
+
+      .then((res) => {
+        setReportedAccidents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Box>
@@ -255,7 +304,7 @@ const Dashboard = () => {
                     <TableBody sx={{ bgcolor: "#EEEEEE" }}>
                       {recentAccidents.map((accident) => (
                         <TableRow
-                          key={accident.id}
+                          key={accident.index}
                           sx={{ "& > *": { borderBottom: "unset" } }}
                         >
                           <TableCell align="center">
