@@ -126,16 +126,16 @@ const Register = () => {
           {/* officer details */}
           <Card>
             <Container>
-              <CardHeader title="Officer Details" />
+              <CardHeader title="REGISTER OFFICER" />
               <CardContent>
-                <form noValidate autoComplete="off">
+                <form onSubmit={handleSubmit} noValidate autoComplete="off">
                   {/* personal details */}
-                  <Divider sx={{ marginBottom: 4 }}>
-                    <Chip label="Personal Details" />
+                  <Divider sx={{ marginBottom: 2 }}>
+                    <Chip label="Personal Details" size="small" />
                   </Divider>
                   <Box sx={{ display: "flex" }}>
                     <TextField
-                      sx={{ marginBottom: 3, marginRight: 1 }}
+                      sx={{ marginBottom: 2, marginRight: 1 }}
                       onChange={(e) => {
                         setFirstName(e.target.value);
                         setFirstNameError(false);
@@ -146,9 +146,10 @@ const Register = () => {
                       required
                       error={firstNameError}
                       value={firstName}
+                      size="small"
                     />
                     <TextField
-                      sx={{ marginBottom: 3, marginLeft: 1 }}
+                      sx={{ marginBottom: 2, marginLeft: 1 }}
                       onChange={(e) => {
                         setLastName(e.target.value);
                         setLastNameError(false);
@@ -159,10 +160,11 @@ const Register = () => {
                       required
                       error={lastNameError}
                       value={lastName}
+                      size="small"
                     />
                   </Box>
                   <TextField
-                    sx={{ marginBottom: 3 }}
+                    sx={{ marginBottom: 2 }}
                     onChange={(e) => {
                       setNic(e.target.value);
                       setNicError(false);
@@ -173,6 +175,7 @@ const Register = () => {
                     required
                     error={nicError}
                     value={nic}
+                    size="small"
                   />
                   <TextField
                     sx={{ marginBottom: 4, width: "50%" }}
@@ -185,14 +188,15 @@ const Register = () => {
                     required
                     error={telephoneError}
                     value={telephone}
+                    size="small"
                   />
                   {/* official details */}
-                  <Divider sx={{ marginBottom: 4 }}>
-                    <Chip label="Official Details" />
+                  <Divider sx={{ marginBottom: 2 }}>
+                    <Chip label="Official Details" size="small" />
                   </Divider>
                   <Box sx={{ display: "flex" }}>
                     <TextField
-                      sx={{ marginBottom: 4, marginRight: 1 }}
+                      sx={{ marginBottom: 2, marginRight: 1 }}
                       onChange={(e) => {
                         setOfficerId(e.target.value);
                         setOfficerIdError(false);
@@ -203,6 +207,7 @@ const Register = () => {
                       required
                       error={officerIdError}
                       value={officerId}
+                      size="small"
                     />
                     <TextField
                       sx={{ marginBottom: 4, marginLeft: 1 }}
@@ -216,8 +221,52 @@ const Register = () => {
                       required
                       error={policeStationError}
                       value={policeStation}
+                      size="small"
                     />
                   </Box>
+                  {/*credentials*/}
+                  <Divider sx={{ marginBottom: 2 }}>
+                    <Chip label="Credentials" size="small" />
+                  </Divider>
+                  <Box sx={{ display: "flex" }}>
+                    <TextField
+                      sx={{ marginBottom: 2 , marginRight: 1 }}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        setPasswordError(false);
+                      }}
+                      label="Password"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={passwordError}
+                      value={password}
+                      size="small"
+                    />
+                    <TextField
+                      sx={{ marginBottom: 4 , marginLeft: 1 }}
+                      onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                        setConfirmPasswordError(false);
+                      }}
+                      label="Confirm Password"
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={confirmPasswordError}
+                      value={confirmPassword}
+                      size="small"
+                    />
+                  </Box>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      fullWidth
+                      size="small"
+                      sx={{ marginBottom: 2 ,padding:1}}
+                    >
+                      Register Officer
+                    </Button>
                 </form>
               </CardContent>
             </Container>
@@ -229,7 +278,7 @@ const Register = () => {
               {/* credentials */}
               <CardHeader title="Credentials" />
               <CardContent>
-                <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                <form>
                   <TextField
                     sx={{ marginBottom: 3 }}
                     onChange={(e) => {
@@ -242,6 +291,7 @@ const Register = () => {
                     required
                     error={passwordError}
                     value={password}
+                    size="small"
                   />
                   <TextField
                     sx={{ marginBottom: 4 }}
@@ -255,12 +305,13 @@ const Register = () => {
                     required
                     error={confirmPasswordError}
                     value={confirmPassword}
+                    size="small"
                   />
                   <Button
                     variant="contained"
                     type="submit"
                     fullWidth
-                    size="large"
+                    size="small"
                     sx={{ marginBottom: 4 }}
                   >
                     Register Officer
