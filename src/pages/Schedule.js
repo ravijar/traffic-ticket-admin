@@ -12,6 +12,7 @@ import {
   FormLabel,
   Grid,
   IconButton,
+  MenuItem,
   Paper,
   Radio,
   RadioGroup,
@@ -34,6 +35,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 
 import axios from "axios";
+import { policeStation } from "../data/DummyData";
 
 function transformData(inputData) {
   const transformedData = [];
@@ -205,6 +207,7 @@ const Schedule = () => {
   const [date, setDate] = useState(dayjs(new Date()));
   const [data, setData] = useState([]);
   const [submit, setSubmit] = useState(false);
+  const [locations, setLocations] = useState([]);
 
   // input errors
   const [officerIdError, setOfficerIdError] = useState(false);
@@ -218,6 +221,20 @@ const Schedule = () => {
 
       .then((res) => {
         setData(transformData(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .get(
+        "http://localhost:8000/api/officerlocations/get_police_station_locations/",
+        {
+          params: { police_station: policeStation },
+        }
+      )
+      .then((res) => {
+        setLocations(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -298,19 +315,30 @@ const Schedule = () => {
                     error={officerIdError}
                     value={officerId}
                   />
+
                   <TextField
                     sx={{ marginBottom: 3 }}
                     onChange={(e) => {
                       setLocation(e.target.value);
                       setLocationError(false);
                     }}
+                    id="location-select"
                     label="Location"
                     variant="outlined"
                     fullWidth
                     required
+                    select
                     error={locationError}
                     value={location}
-                  />
+                    defaultValue=""
+                  >
+                    {locations.map((datum) => (
+                      <MenuItem key={datum.location} value={datum.location}>
+                        {datum.location}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
                   <FormControl sx={{ marginBottom: 4 }}>
                     <FormLabel>Select Shift</FormLabel>
                     <Container>
