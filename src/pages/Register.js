@@ -12,6 +12,7 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
+import { policeStation } from "../data/DummyData";
 
 const Register = () => {
   // register officer
@@ -21,7 +22,7 @@ const Register = () => {
   const [nic, setNic] = useState("");
   const [telephone, setTelephone] = useState("");
   const [officerId, setOfficerId] = useState("");
-  const [policeStation, setPoliceStation] = useState("");
+  const [station, setStation] = useState(policeStation);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -31,13 +32,13 @@ const Register = () => {
   const [nicError, setNicError] = useState(false);
   const [telephoneError, setTelephoneError] = useState(false);
   const [officerIdError, setOfficerIdError] = useState(false);
-  const [policeStationError, setPoliceStationError] = useState(false);
+  const [stationError, setStationError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
   // register officer location
   // text field values
-  const [officerPoliceStation, setOfficerPoliceStation] = useState("");
+  const [officerPoliceStation, setOfficerPoliceStation] = useState(policeStation);
   const [officerLocation, setOfficerLocation] = useState("");
 
   // text field errors
@@ -47,7 +48,7 @@ const Register = () => {
 
   // register camera location
   // text field values
-  const [cameraPoliceStation, setCameraPoliceStation] = useState("");
+  const [cameraPoliceStation, setCameraPoliceStation] = useState(policeStation);
   const [cameraLocation, setCameraLocation] = useState("");
 
   // text field errors
@@ -74,8 +75,8 @@ const Register = () => {
     if (officerId === "") {
       setOfficerIdError(true);
     }
-    if (policeStation === "") {
-      setPoliceStationError(true);
+    if (station === "") {
+      setStationError(true);
     }
     if (password === "") {
       setPasswordError(true);
@@ -91,7 +92,7 @@ const Register = () => {
       nic &&
       telephone &&
       officerId &&
-      policeStation &&
+      station &&
       password &&
       confirmPassword
     ) {
@@ -101,7 +102,7 @@ const Register = () => {
         nic,
         telephone,
         officerId,
-        policeStation,
+        station,
         password,
         confirmPassword
       );
@@ -113,7 +114,7 @@ const Register = () => {
               last_name: lastName,
               nic: nic,
               telephone: telephone,
-              police_station: policeStation,
+              police_station: station,
               password: password,
               officer_id: officerId,
             })
@@ -125,7 +126,7 @@ const Register = () => {
               setNic("");
               setTelephone("");
               setOfficerId("");
-              setPoliceStation("");
+              setStation("");
               setPassword("");
               setConfirmPassword("");
             })
@@ -301,15 +302,15 @@ const Register = () => {
                     <TextField
                       sx={{ marginBottom: 4, marginLeft: 1 }}
                       onChange={(e) => {
-                        setPoliceStation(e.target.value);
-                        setPoliceStationError(false);
+                        setStation(e.target.value);
+                        setStationError(false);
                       }}
                       label="Police Station"
                       variant="outlined"
                       fullWidth
                       required
-                      error={policeStationError}
-                      value={policeStation}
+                      error={stationError}
+                      value={station}
                       size="small"
                     />
                   </Box>
