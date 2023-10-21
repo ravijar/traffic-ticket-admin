@@ -1,8 +1,3 @@
-// reports page
-
-export const searchValue = (data, attribute, value) =>
-  data.filter((datum) => datum[attribute] === value);
-
 // review page
 
 function createData(id, vehicleNo, violation, location, date, time) {

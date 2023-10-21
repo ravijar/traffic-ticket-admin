@@ -15,7 +15,6 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import SearchIcon from "@mui/icons-material/Search";
 import EnhancedTable from "../components/EnhancedTable";
-import { searchValue } from "../data/DummyData";
 import axios from "axios";
 
 // search bar styles
@@ -172,13 +171,21 @@ const Reports = () => {
   const [attributeError, setAttributeError] = useState(false);
   const [input, setInput] = useState("");
   const [rows, setRows] = useState([]);
+  const [fetchedData, setFetchedData] = useState([]);
 
+  // search function
+  const searchValue = (data, attribute, value) =>
+    data.filter((datum) =>
+      datum[attribute].toLowerCase().includes(value.toLowerCase())
+    );
+
+  // fetching data
   const fetchData = (attribute) => {
     axios
       .get(`http://localhost:8000/api/${attribute}/`)
 
       .then((res) => {
-        setRows(res.data.results);
+        setFetchedData(res.data.results);
       })
       .catch((err) => {
         console.log(err);
@@ -207,7 +214,7 @@ const Reports = () => {
     if (event.key === "Enter") {
       if (attribute !== "") {
         if (input !== "") {
-          setRows(searchValue(rows, attribute, input));
+          setRows(searchValue(fetchedData, attribute, input));
         }
       } else {
         setAttributeError(true);
@@ -215,26 +222,36 @@ const Reports = () => {
     }
   };
 
+  // fetching data on changing tab
+  useEffect(() => {
+    switch (tab) {
+      case "policeOfficers":
+        fetchData("policeofficers");
+        break;
+      case "fines":
+        fetchData("fines");
+        break;
+      case "drivers":
+        fetchData("drivers");
+        break;
+      default:
+        fetchData("accidents");
+        break;
+    }
+  }, [tab]);
+
   // updating rows to default values after a search
   useEffect(() => {
     if (input === "") {
-      setRows([]);
-      switch (tab) {
-        case "policeOfficers":
-          fetchData("policeofficers");
-          break;
-        case "fines":
-          fetchData("fines");
-          break;
-        case "drivers":
-          fetchData("drivers");
-          break;
-        default:
-          fetchData("accidents");
-          break;
+      setRows(fetchedData);
+    } else {
+      if (attribute !== "") {
+        setRows(searchValue(fetchedData, attribute, input));
+      } else {
+        setAttributeError(true);
       }
     }
-  }, [input, tab]);
+  }, [fetchedData, input, attribute]);
 
   // table parameters
   let orderBy = "date";
