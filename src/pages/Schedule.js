@@ -36,6 +36,7 @@ import dayjs from "dayjs";
 
 import axios from "axios";
 import { policeStation } from "../data/DummyData";
+import CustomizableAlert from "../components/CustomizableAlert";
 
 function transformData(inputData) {
   const transformedData = [];
@@ -213,6 +214,23 @@ const Schedule = () => {
   const [officerIdError, setOfficerIdError] = useState(false);
   const [locationError, setLocationError] = useState(false);
 
+  // alert
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("success");
+  const [message, setMessage] = useState("");
+
+  const openAlert = () => {
+    setOpen(true);
+  };
+
+  const closeAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/schedules/get_scheduled_officers/", {
@@ -265,14 +283,17 @@ const Schedule = () => {
 
           .then(() => {
             setSubmit(true);
-            alert("Schedule created!");
+            setSeverity("success");
+            setMessage("Schedule created!");
+            openAlert();
             setLocation("");
             setOfficerId("");
             resolve();
           })
           .catch((error) => {
-            alert("Shedule not created!");
-            reject(error);
+            setSeverity("error");
+            setMessage("Schedule creation failed!");
+            openAlert();
           });
         setSubmit(false);
       });
@@ -281,6 +302,7 @@ const Schedule = () => {
 
   return (
     <Container>
+      <CustomizableAlert open={open} handleClose={closeAlert} severity={severity} message={message}/>
       <Grid container spacing={6}>
         {/* create schedule */}
         <Grid item xs={12} md={5}>

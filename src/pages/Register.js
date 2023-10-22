@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { policeStation } from "../data/DummyData";
+import CustomizableAlert from "../components/CustomizableAlert";
 
 const Register = () => {
   // register officer
@@ -38,7 +39,8 @@ const Register = () => {
 
   // register officer location
   // text field values
-  const [officerPoliceStation, setOfficerPoliceStation] = useState(policeStation);
+  const [officerPoliceStation, setOfficerPoliceStation] =
+    useState(policeStation);
   const [officerLocation, setOfficerLocation] = useState("");
 
   // text field errors
@@ -55,6 +57,23 @@ const Register = () => {
   const [cameraPoliceStationError, setCameraPoliceStationError] =
     useState(false);
   const [cameraLocationError, setCameraLocationError] = useState(false);
+
+  // alert
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("success");
+  const [message, setMessage] = useState("");
+
+  const openAlert = () => {
+    setOpen(true);
+  };
+
+  const closeAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handleOfficerRegister = (e) => {
     e.preventDefault();
@@ -120,23 +139,27 @@ const Register = () => {
             })
 
             .then(() => {
-              alert("Officer successfully registered!");
+              setSeverity("success");
+              setMessage("Officer Registered!");
+              openAlert();
               setFirstName("");
               setLastName("");
               setNic("");
               setTelephone("");
               setOfficerId("");
-              setStation("");
               setPassword("");
               setConfirmPassword("");
             })
             .catch((error) => {
-              alert("Officer registration failed!");
-              reject(error);
+              setSeverity("error");
+              setMessage("Officer Registration Failed!");
+              openAlert();
             });
         });
       } else {
-        alert("Passwords do not match!");
+        setSeverity("warning");
+        setMessage("Passwords Do Not Match!");
+        openAlert();
       }
     }
   };
@@ -161,13 +184,15 @@ const Register = () => {
             location: officerLocation,
           })
           .then(() => {
-            alert("Location successfully registered!");
-            setOfficerPoliceStation("");
+            setSeverity("success");
+            setMessage("Location Registered!");
+            openAlert();
             setOfficerLocation("");
           })
           .catch((error) => {
-            alert("Location registration failed!");
-            reject(error);
+            setSeverity("error");
+            setMessage("Location Registration Failed!");
+            openAlert();
           });
       });
     }
@@ -193,13 +218,15 @@ const Register = () => {
             location: cameraLocation,
           })
           .then(() => {
-            alert("Location successfully registered!");
+            setSeverity("success");
+            setMessage("Location Registered!");
+            openAlert();
             setCameraLocation("");
-            setCameraPoliceStation("");
           })
           .catch((error) => {
-            alert("Location registration failed!");
-            reject(error);
+            setSeverity("error");
+            setMessage("Location Registration Failed!");
+            openAlert();
           });
       });
     }
@@ -207,6 +234,7 @@ const Register = () => {
 
   return (
     <Container>
+      <CustomizableAlert open={open} handleClose={closeAlert} severity={severity} message={message}/>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           {/* officer register */}
