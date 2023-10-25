@@ -35,10 +35,14 @@ export const AuthProvider = ({ children }) => {
 
     let data = await response.json();
     if (response.status === 200) {
-      setAuthTokens(data);
-      setUser(jwt_decode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
-      navigate("/");
+      if(jwt_decode(JSON.stringify(data)).role !== "admin"){
+        alert("Access Denied!")
+      }else{
+        setAuthTokens(data);
+        setUser(jwt_decode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+        navigate("/");
+      }
     } else if (response.status === 401) {
       alert("Invalid credentials!");
     } else {
