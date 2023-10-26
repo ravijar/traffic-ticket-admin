@@ -69,4 +69,3 @@ export const vehicleCount = [
 
 export const detectedViolations = 5;
 
-export const policeStation = "Moratumulla";

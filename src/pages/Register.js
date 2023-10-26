@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Card,
@@ -12,10 +12,13 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
-import { policeStation } from "../data/DummyData";
 import CustomizableAlert from "../components/CustomizableAlert";
+import AuthContext from "../context/AuthContext";
 
 const Register = () => {
+  const user = useContext(AuthContext);
+  console.log(user)
+
   // register officer
   // text field values
   const [firstName, setFirstName] = useState("");
@@ -23,7 +26,7 @@ const Register = () => {
   const [nic, setNic] = useState("");
   const [telephone, setTelephone] = useState("");
   const [officerId, setOfficerId] = useState("");
-  const [station, setStation] = useState(policeStation);
+  const [station, setStation] = useState(user.user.police_station);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -40,7 +43,7 @@ const Register = () => {
   // register officer location
   // text field values
   const [officerPoliceStation, setOfficerPoliceStation] =
-    useState(policeStation);
+    useState(user.user.police_station);
   const [officerLocation, setOfficerLocation] = useState("");
 
   // text field errors
@@ -50,7 +53,7 @@ const Register = () => {
 
   // register camera location
   // text field values
-  const [cameraPoliceStation, setCameraPoliceStation] = useState(policeStation);
+  const [cameraPoliceStation, setCameraPoliceStation] = useState(user.user.police_station);
   const [cameraLocation, setCameraLocation] = useState("");
 
   // text field errors

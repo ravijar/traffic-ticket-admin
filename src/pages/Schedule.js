@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -35,8 +35,8 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 
 import axios from "axios";
-import { policeStation } from "../data/DummyData";
 import CustomizableAlert from "../components/CustomizableAlert";
+import AuthContext from "../context/AuthContext";
 
 function transformData(inputData) {
   const transformedData = [];
@@ -201,6 +201,8 @@ const Row = (props) => {
 };
 
 const Schedule = () => {
+  const user = useContext(AuthContext)
+
   // input values
   const [officerId, setOfficerId] = useState("");
   const [location, setLocation] = useState("");
@@ -248,7 +250,7 @@ const Schedule = () => {
       .get(
         "http://localhost:8000/api/officerlocations/get_police_station_locations/",
         {
-          params: { police_station: policeStation },
+          params: { police_station: user.user.police_station },
         }
       )
       .then((res) => {

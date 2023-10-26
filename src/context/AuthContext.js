@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
         setAuthTokens(data);
         setUser(jwt_decode(data.access));
         localStorage.setItem("authTokens", JSON.stringify(data));
+        console.log(jwt_decode(JSON.stringify(data)));
         navigate("/");
       }
     } else if (response.status === 401) {

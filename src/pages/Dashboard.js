@@ -19,12 +19,14 @@ import dayjs from "dayjs";
 import {
   vehicleCount,
   detectedViolations,
-  policeStation,
 } from "../data/DummyData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 const Dashboard = () => {
+  const user = useContext(AuthContext);
+
   // card data
   const headerBgColor = "#616161";
   const bodyBgColor = "#D2D2D2";
@@ -260,7 +262,7 @@ const Dashboard = () => {
             {/* police station banner */}
             <Card sx={{ marginBottom: 2 }}>
               <CardHeader
-                title={policeStation.toUpperCase()}
+                title={user.user.police_station.toUpperCase()}
                 titleTypographyProps={{ color: titleColor, variant: "h4" }}
                 subheader={date}
                 subheaderTypographyProps={{
