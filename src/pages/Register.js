@@ -115,16 +115,6 @@ const Register = () => {
       password &&
       confirmPassword
     ) {
-      console.log(
-        firstName,
-        lastName,
-        nic,
-        telephone,
-        officerId,
-        station,
-        password,
-        confirmPassword
-      );
       if (password === confirmPassword) {
         return new Promise((resolve, reject) => {
           axios
@@ -234,7 +224,12 @@ const Register = () => {
 
   return (
     <Container>
-      <CustomizableAlert open={open} handleClose={closeAlert} severity={severity} message={message}/>
+      <CustomizableAlert
+        open={open}
+        handleClose={closeAlert}
+        severity={severity}
+        message={message}
+      />
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           {/* officer register */}

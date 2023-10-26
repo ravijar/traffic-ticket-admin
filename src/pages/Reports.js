@@ -80,8 +80,8 @@ const Reports = () => {
       label: "Description",
     },
     {
-      id: "vehicles",
-      label: "Related Vehicles",
+      id: "reporter",
+      label: "Reporter",
     },
   ];
 
@@ -161,8 +161,19 @@ const Reports = () => {
       label: "Vehicle No",
     },
     {
-      id: "telephone",
-      label: "Telephone",
+      id: "email",
+      label: "Email",
+    },
+  ];
+
+  const suggestionHead = [
+    {
+      id: "id",
+      label: "ID",
+    },
+    {
+      id: "suggestion",
+      label: "Suggestion / Complain",
     },
   ];
 
@@ -186,8 +197,6 @@ const Reports = () => {
 
       .then((res) => {
         setFetchedData(res.data.results);
-        console.log("data",fetchedData)
-        console.log("rows",rows)
       })
       .catch((err) => {
         console.log(err);
@@ -196,8 +205,8 @@ const Reports = () => {
 
   // handlers
   const handleTab = (event, value) => {
-    setRows([])
-    setFetchedData([])
+    setRows([]);
+    setFetchedData([]);
     setTab(value);
     setAttribute("");
     setInput("");
@@ -228,8 +237,8 @@ const Reports = () => {
 
   // fetching data on changing tab
   useEffect(() => {
-    setRows([])
-    setFetchedData([])
+    setRows([]);
+    setFetchedData([]);
     switch (tab) {
       case "policeOfficers":
         fetchData("policeofficers");
@@ -239,6 +248,9 @@ const Reports = () => {
         break;
       case "drivers":
         fetchData("drivers");
+        break;
+      case "suggestions":
+        fetchData("suggestions");
         break;
       default:
         fetchData("accidents");
@@ -283,6 +295,12 @@ const Reports = () => {
       headCells = driversHead;
       break;
     }
+    case "suggestions": {
+      orderBy = "id";
+      tableTitle = "Suggestions / Complains";
+      headCells = suggestionHead;
+      break;
+    }
     default: {
       orderBy = "date";
       tableTitle = "Accidents";
@@ -295,11 +313,24 @@ const Reports = () => {
     <Container>
       {/* tabs */}
       <Box sx={{ width: "100%", marginBottom: 3 }}>
-        <Tabs value={tab} onChange={handleTab} >
-          <Tab label="Accidents" value="accidents" disabled={rows.length === 0}/>
-          <Tab label="Fines" value="fines" disabled={rows.length === 0}/>
-          <Tab label="Police Officers" value="policeOfficers" disabled={rows.length === 0}/>
+        <Tabs value={tab} onChange={handleTab}>
+          <Tab
+            label="Accidents"
+            value="accidents"
+            disabled={rows.length === 0}
+          />
+          <Tab label="Fines" value="fines" disabled={rows.length === 0} />
+          <Tab
+            label="Police Officers"
+            value="policeOfficers"
+            disabled={rows.length === 0}
+          />
           <Tab label="Drivers" value="drivers" disabled={rows.length === 0} />
+          <Tab
+            label="Suggestions / Complains"
+            value="suggestions"
+            disabled={rows.length === 0}
+          />
         </Tabs>
       </Box>
 
