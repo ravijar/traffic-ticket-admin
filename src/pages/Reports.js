@@ -16,6 +16,7 @@ import styled from "@emotion/styled";
 import SearchIcon from "@mui/icons-material/Search";
 import EnhancedTable from "../components/EnhancedTable";
 import axios from "axios";
+import { API_URL } from "../constants/urls";
 
 // search bar styles
 const Search = styled("div")(({ theme }) => ({
@@ -193,7 +194,7 @@ const Reports = () => {
   // fetching data
   const fetchData = (attribute) => {
     axios
-      .get(`http://localhost:8000/api/${attribute}/`)
+      .get(`${API_URL}/api/${attribute}/`)
 
       .then((res) => {
         setFetchedData(res.data.results);

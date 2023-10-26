@@ -37,6 +37,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import CustomizableAlert from "../components/CustomizableAlert";
 import AuthContext from "../context/AuthContext";
+import { API_URL } from "../constants/urls";
 
 function transformData(inputData) {
   const transformedData = [];
@@ -235,7 +236,7 @@ const Schedule = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/schedules/get_scheduled_officers/", {
+      .get(`${API_URL}/api/schedules/get_scheduled_officers/`, {
         params: {
           date: date.format("YYYY-MM-DD"),
           police_station: user.user.police_station,
@@ -251,7 +252,7 @@ const Schedule = () => {
 
     axios
       .get(
-        "http://localhost:8000/api/officerlocations/get_police_station_locations/",
+        `${API_URL}/api/officerlocations/get_police_station_locations/`,
         {
           params: { police_station: user.user.police_station },
         }
@@ -279,7 +280,7 @@ const Schedule = () => {
     if (officerId && location) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://localhost:8000/api/schedules/create_schedule/", {
+          .post(`${API_URL}/api/schedules/create_schedule/`, {
             officer_id: officerId,
             location: location,
             shift: shift,

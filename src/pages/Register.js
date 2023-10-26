@@ -14,10 +14,10 @@ import {
 import axios from "axios";
 import CustomizableAlert from "../components/CustomizableAlert";
 import AuthContext from "../context/AuthContext";
+import { API_URL } from "../constants/urls";
 
 const Register = () => {
   const user = useContext(AuthContext);
-  console.log(user)
 
   // register officer
   // text field values
@@ -121,7 +121,7 @@ const Register = () => {
       if (password === confirmPassword) {
         return new Promise((resolve, reject) => {
           axios
-            .post("http://localhost:8000/api/users/officer_signup/", {
+            .post(`${API_URL}/api/users/officer_signup/`, {
               first_name: firstName,
               last_name: lastName,
               nic: nic,
@@ -172,7 +172,7 @@ const Register = () => {
     if (officerPoliceStation && officerLocation) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://localhost:8000/api/officerlocations/", {
+          .post(`${API_URL}/api/officerlocations/`, {
             police_station: officerPoliceStation,
             location: officerLocation,
           })
@@ -206,7 +206,7 @@ const Register = () => {
     if (cameraPoliceStation && cameraLocation) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://localhost:8000/api/camerlocations/", {
+          .post(`${API_URL}/api/camerlocations/`, {
             police_station: cameraPoliceStation,
             location: cameraLocation,
           })

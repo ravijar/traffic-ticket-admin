@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../constants/urls";
 
 const AuthContext = createContext();
 
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   let navigate = useNavigate();
 
   let loginUser = async (userName, password) => {
-    let response = await fetch("http://127.0.0.1:8000/api/token/", {
+    let response = await fetch(`${API_URL}/api/token/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

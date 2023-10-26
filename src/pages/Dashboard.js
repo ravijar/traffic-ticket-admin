@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 import dayjs from "dayjs";
+import { API_URL } from "../constants/urls";
 
 import {
   vehicleCount,
@@ -47,7 +48,7 @@ const Dashboard = () => {
   useEffect(() => {
     // fetching recent accidents
     axios
-      .get("http://localhost:8000/api/accidents/get_recent_accidents/")
+      .get(`${API_URL}/api/accidents/get_recent_accidents/`)
 
       .then((res) => {
         setRecentAccidents(res.data);
@@ -58,7 +59,7 @@ const Dashboard = () => {
 
     // fetching monthly count
     axios
-      .get("http://localhost:8000/api/accidents/get_monthly_count/")
+      .get(`${API_URL}/api/accidents/get_monthly_count/`)
 
       .then((res) => {
         setMonthlyCount(res.data);
@@ -69,7 +70,7 @@ const Dashboard = () => {
 
     // fetching weekly count
     axios
-      .get("http://localhost:8000/api/accidents/get_weekly_count/")
+      .get(`${API_URL}/api/accidents/get_weekly_count/`)
 
       .then((res) => {
         setWeeklyCount(res.data);
@@ -80,7 +81,7 @@ const Dashboard = () => {
 
       // fetching reported accident coutn
       axios
-      .get("http://localhost:8000/api/accidents/get_reported_accident_count/")
+      .get(`${API_URL}/api/accidents/get_reported_accident_count/`)
 
       .then((res) => {
         setReportedAccidents(res.data);
