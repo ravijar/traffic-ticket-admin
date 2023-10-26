@@ -201,7 +201,7 @@ const Row = (props) => {
 };
 
 const Schedule = () => {
-  const user = useContext(AuthContext)
+  const user = useContext(AuthContext);
 
   // input values
   const [officerId, setOfficerId] = useState("");
@@ -236,7 +236,10 @@ const Schedule = () => {
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/schedules/get_scheduled_officers/", {
-        params: { date: date.format("YYYY-MM-DD") },
+        params: {
+          date: date.format("YYYY-MM-DD"),
+          police_station: user.user.police_station,
+        },
       })
 
       .then((res) => {
@@ -280,6 +283,7 @@ const Schedule = () => {
             officer_id: officerId,
             location: location,
             shift: shift,
+            police_station: user.user.police_station,
             date: `${date.format("YYYY-MM-DD")}`,
           })
 
@@ -304,7 +308,12 @@ const Schedule = () => {
 
   return (
     <Container>
-      <CustomizableAlert open={open} handleClose={closeAlert} severity={severity} message={message}/>
+      <CustomizableAlert
+        open={open}
+        handleClose={closeAlert}
+        severity={severity}
+        message={message}
+      />
       <Grid container spacing={6}>
         {/* create schedule */}
         <Grid item xs={12} md={5}>
