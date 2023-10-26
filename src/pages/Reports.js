@@ -186,6 +186,8 @@ const Reports = () => {
 
       .then((res) => {
         setFetchedData(res.data.results);
+        console.log("data",fetchedData)
+        console.log("rows",rows)
       })
       .catch((err) => {
         console.log(err);
@@ -194,6 +196,8 @@ const Reports = () => {
 
   // handlers
   const handleTab = (event, value) => {
+    setRows([])
+    setFetchedData([])
     setTab(value);
     setAttribute("");
     setInput("");
@@ -224,6 +228,8 @@ const Reports = () => {
 
   // fetching data on changing tab
   useEffect(() => {
+    setRows([])
+    setFetchedData([])
     switch (tab) {
       case "policeOfficers":
         fetchData("policeofficers");
@@ -289,11 +295,11 @@ const Reports = () => {
     <Container>
       {/* tabs */}
       <Box sx={{ width: "100%", marginBottom: 3 }}>
-        <Tabs value={tab} onChange={handleTab}>
-          <Tab label="Accidents" value="accidents" />
-          <Tab label="Fines" value="fines" />
-          <Tab label="Police Officers" value="policeOfficers" />
-          <Tab label="Drivers" value="drivers" />
+        <Tabs value={tab} onChange={handleTab} >
+          <Tab label="Accidents" value="accidents" disabled={rows.length === 0}/>
+          <Tab label="Fines" value="fines" disabled={rows.length === 0}/>
+          <Tab label="Police Officers" value="policeOfficers" disabled={rows.length === 0}/>
+          <Tab label="Drivers" value="drivers" disabled={rows.length === 0} />
         </Tabs>
       </Box>
 
