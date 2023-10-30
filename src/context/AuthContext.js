@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
 
   let navigate = useNavigate();
 
-  let loginUser = async (userName, password,setLoading) => {
+  // user sign in
+  let loginUser = async (userName, password, setLoading) => {
     setLoading(true);
     let response = await fetch(`${API_URL}/api/token/`, {
       method: "POST",
@@ -38,9 +39,10 @@ export const AuthProvider = ({ children }) => {
     let data = await response.json();
     setLoading(false);
     if (response.status === 200) {
-      if(jwt_decode(JSON.stringify(data)).role !== "admin"){
-        alert("Access Denied!")
-      }else{
+      // checking for the user role
+      if (jwt_decode(JSON.stringify(data)).role !== "admin") {
+        alert("Access Denied!");
+      } else {
         setAuthTokens(data);
         setUser(jwt_decode(data.access));
         localStorage.setItem("authTokens", JSON.stringify(data));
@@ -54,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // user sign out
   let logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
@@ -61,6 +64,7 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
+  // updating refresh token
   let updateToken = async () => {
     let response = await fetch(`${API_URL}/api/token/refresh/`, {
       method: "POST",

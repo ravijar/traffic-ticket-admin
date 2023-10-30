@@ -19,6 +19,7 @@ const Review = () => {
 
   const [expanded, setExpanded] = useState(false);
 
+  // handlers
   const handleAccordion = (panelId) => (event, isExpanded) => {
     if (isExpanded) {
       setExpanded(panelId);
@@ -32,7 +33,13 @@ const Review = () => {
   return (
     <Container>
       <Card>
-        <CardHeader title="CCTV Violation Detections" />
+        <CardHeader
+          title="CCTV Violation Detections"
+          subheader="Automatic System is under Construction. This section is not functional!"
+          subheaderTypographyProps={{
+            color: "red",
+          }}
+        />
         <CardContent>
           {rows.map((row) => (
             <Accordion

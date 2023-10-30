@@ -43,8 +43,9 @@ const Register = () => {
 
   // register officer location
   // text field values
-  const [officerPoliceStation, setOfficerPoliceStation] =
-    useState(user.user.police_station);
+  const [officerPoliceStation, setOfficerPoliceStation] = useState(
+    user.user.police_station
+  );
   const [officerLocation, setOfficerLocation] = useState("");
 
   // text field errors
@@ -54,7 +55,9 @@ const Register = () => {
 
   // register camera location
   // text field values
-  const [cameraPoliceStation, setCameraPoliceStation] = useState(user.user.police_station);
+  const [cameraPoliceStation, setCameraPoliceStation] = useState(
+    user.user.police_station
+  );
   const [cameraLocation, setCameraLocation] = useState("");
 
   // text field errors
@@ -69,6 +72,7 @@ const Register = () => {
 
   const [loading, setLoading] = useState(false);
 
+  // alert actions
   const openAlert = () => {
     setOpen(true);
   };
@@ -81,6 +85,7 @@ const Register = () => {
     setOpen(false);
   };
 
+  // handlers
   const handleOfficerRegister = (e) => {
     e.preventDefault();
 
@@ -239,7 +244,9 @@ const Register = () => {
 
   return (
     <Container>
+      {/* loading screen */}
       {loading && <Loading loading={loading} />}
+      {/* alert */}
       <CustomizableAlert
         open={open}
         handleClose={closeAlert}

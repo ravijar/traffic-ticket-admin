@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoutes from "./utils/PrivateRoutes";
 
+// theme data
 const theme = createTheme({
   palette: {
     primary: {

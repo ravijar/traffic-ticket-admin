@@ -20,6 +20,8 @@ import Loading from "../components/Loading";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  // text field values
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,6 +30,7 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
 
+  // handlers
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
@@ -46,7 +49,7 @@ const Login = () => {
     }
 
     if (userName && password) {
-      loginUser(userName, password,setLoading);
+      loginUser(userName, password, setLoading);
     }
   };
 
@@ -64,7 +67,10 @@ const Login = () => {
         boxSizing: "border-box",
         padding: (theme) => theme.spacing(2),
       }}
-    > {loading && <Loading loading={loading} />}
+    >
+      {" "}
+      {/* loading screen */}
+      {loading && <Loading loading={loading} />}
       <Container
         maxWidth="sm"
         disableGutters

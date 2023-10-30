@@ -40,6 +40,7 @@ import AuthContext from "../context/AuthContext";
 import { API_URL } from "../constants/urls";
 import Loading from "../components/Loading";
 
+// transforming fetched data to be used in the table
 function transformData(inputData) {
   const transformedData = [];
 
@@ -223,7 +224,7 @@ const Schedule = () => {
   const [severity, setSeverity] = useState("success");
   const [message, setMessage] = useState("");
 
-  const[loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const openAlert = () => {
     setOpen(true);
@@ -237,6 +238,7 @@ const Schedule = () => {
     setOpen(false);
   };
 
+  // fetching schedule data
   useEffect(() => {
     axios
       .get(`${API_URL}/api/schedules/get_scheduled_officers/`, {
@@ -254,12 +256,9 @@ const Schedule = () => {
       });
 
     axios
-      .get(
-        `${API_URL}/api/officerlocations/get_police_station_locations/`,
-        {
-          params: { police_station: user.user.police_station },
-        }
-      )
+      .get(`${API_URL}/api/officerlocations/get_police_station_locations/`, {
+        params: { police_station: user.user.police_station },
+      })
       .then((res) => {
         setLocations(res.data);
       })
@@ -268,6 +267,7 @@ const Schedule = () => {
       });
   }, [date, submit]);
 
+  // handlers
   const handleSubmit = (e) => {
     e.preventDefault();
 

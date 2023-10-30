@@ -16,11 +16,7 @@ import {
 import { LineChart } from "@mui/x-charts";
 import dayjs from "dayjs";
 import { API_URL } from "../constants/urls";
-
-import {
-  vehicleCount,
-  detectedViolations,
-} from "../data/DummyData";
+import { vehicleCount, detectedViolations } from "../data/DummyData";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
@@ -79,8 +75,8 @@ const Dashboard = () => {
         console.log(err);
       });
 
-      // fetching reported accident coutn
-      axios
+    // fetching reported accident coutn
+    axios
       .get(`${API_URL}/api/accidents/get_reported_accident_count/`)
 
       .then((res) => {

@@ -317,6 +317,7 @@ const Reports = () => {
 
   return (
     <Container>
+      {/* loading screen */}
       {loading && <Loading loading={loading} />}
       {/* tabs */}
       <Box sx={{ width: "100%", marginBottom: 3 }}>
