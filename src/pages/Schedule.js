@@ -38,6 +38,7 @@ import axios from "axios";
 import CustomizableAlert from "../components/CustomizableAlert";
 import AuthContext from "../context/AuthContext";
 import { API_URL } from "../constants/urls";
+import Loading from "../components/Loading";
 
 function transformData(inputData) {
   const transformedData = [];
@@ -222,6 +223,8 @@ const Schedule = () => {
   const [severity, setSeverity] = useState("success");
   const [message, setMessage] = useState("");
 
+  const[loading, setLoading] = useState(false);
+
   const openAlert = () => {
     setOpen(true);
   };
@@ -279,6 +282,7 @@ const Schedule = () => {
     // submit action
     if (officerId && location) {
       return new Promise((resolve, reject) => {
+        setLoading(true);
         axios
           .post(`${API_URL}/api/schedules/create_schedule/`, {
             officer_id: officerId,
@@ -296,11 +300,13 @@ const Schedule = () => {
             setLocation("");
             setOfficerId("");
             resolve();
+            setLoading(false);
           })
           .catch((error) => {
             setSeverity("error");
             setMessage("Schedule creation failed!");
             openAlert();
+            setLoading(false);
           });
         setSubmit(false);
       });
@@ -309,6 +315,7 @@ const Schedule = () => {
 
   return (
     <Container>
+      {loading && <Loading loading={loading} />}
       <CustomizableAlert
         open={open}
         handleClose={closeAlert}

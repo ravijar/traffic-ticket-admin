@@ -16,6 +16,7 @@ import React, { useContext, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AuthContext from "../context/AuthContext";
+import Loading from "../components/Loading";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +25,8 @@ const Login = () => {
 
   const [userNameError, setUserNameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -43,7 +46,7 @@ const Login = () => {
     }
 
     if (userName && password) {
-      loginUser(userName, password);
+      loginUser(userName, password,setLoading);
     }
   };
 
@@ -61,7 +64,7 @@ const Login = () => {
         boxSizing: "border-box",
         padding: (theme) => theme.spacing(2),
       }}
-    >
+    > {loading && <Loading loading={loading} />}
       <Container
         maxWidth="sm"
         disableGutters

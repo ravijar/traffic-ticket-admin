@@ -17,6 +17,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import EnhancedTable from "../components/EnhancedTable";
 import axios from "axios";
 import { API_URL } from "../constants/urls";
+import Loading from "../components/Loading";
 
 // search bar styles
 const Search = styled("div")(({ theme }) => ({
@@ -184,6 +185,7 @@ const Reports = () => {
   const [input, setInput] = useState("");
   const [rows, setRows] = useState([]);
   const [fetchedData, setFetchedData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // search function
   const searchValue = (data, attribute, value) =>
@@ -193,14 +195,17 @@ const Reports = () => {
 
   // fetching data
   const fetchData = (attribute) => {
+    setLoading(true);
     axios
       .get(`${API_URL}/api/${attribute}/`)
 
       .then((res) => {
         setFetchedData(res.data.results);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
@@ -312,6 +317,7 @@ const Reports = () => {
 
   return (
     <Container>
+      {loading && <Loading loading={loading} />}
       {/* tabs */}
       <Box sx={{ width: "100%", marginBottom: 3 }}>
         <Tabs value={tab} onChange={handleTab}>

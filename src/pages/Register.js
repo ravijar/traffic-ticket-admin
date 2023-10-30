@@ -15,6 +15,7 @@ import axios from "axios";
 import CustomizableAlert from "../components/CustomizableAlert";
 import AuthContext from "../context/AuthContext";
 import { API_URL } from "../constants/urls";
+import Loading from "../components/Loading";
 
 const Register = () => {
   const user = useContext(AuthContext);
@@ -65,6 +66,8 @@ const Register = () => {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("success");
   const [message, setMessage] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const openAlert = () => {
     setOpen(true);
@@ -120,6 +123,7 @@ const Register = () => {
     ) {
       if (password === confirmPassword) {
         return new Promise((resolve, reject) => {
+          setLoading(true);
           axios
             .post(`${API_URL}/api/users/officer_signup/`, {
               first_name: firstName,
@@ -142,11 +146,13 @@ const Register = () => {
               setOfficerId("");
               setPassword("");
               setConfirmPassword("");
+              setLoading(false);
             })
             .catch((error) => {
               setSeverity("error");
               setMessage("Officer Registration Failed!");
               openAlert();
+              setLoading(false);
             });
         });
       } else {
@@ -171,6 +177,7 @@ const Register = () => {
     // submit action
     if (officerPoliceStation && officerLocation) {
       return new Promise((resolve, reject) => {
+        setLoading(true);
         axios
           .post(`${API_URL}/api/officerlocations/`, {
             police_station: officerPoliceStation,
@@ -181,11 +188,13 @@ const Register = () => {
             setMessage("Location Registered!");
             openAlert();
             setOfficerLocation("");
+            setLoading(false);
           })
           .catch((error) => {
             setSeverity("error");
             setMessage("Location Registration Failed!");
             openAlert();
+            setLoading(false);
           });
       });
     }
@@ -205,6 +214,7 @@ const Register = () => {
     // submit action
     if (cameraPoliceStation && cameraLocation) {
       return new Promise((resolve, reject) => {
+        setLoading(true);
         axios
           .post(`${API_URL}/api/camerlocations/`, {
             police_station: cameraPoliceStation,
@@ -215,11 +225,13 @@ const Register = () => {
             setMessage("Location Registered!");
             openAlert();
             setCameraLocation("");
+            setLoading(false);
           })
           .catch((error) => {
             setSeverity("error");
             setMessage("Location Registration Failed!");
             openAlert();
+            setLoading(false);
           });
       });
     }
@@ -227,6 +239,7 @@ const Register = () => {
 
   return (
     <Container>
+      {loading && <Loading loading={loading} />}
       <CustomizableAlert
         open={open}
         handleClose={closeAlert}

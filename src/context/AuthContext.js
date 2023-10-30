@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
 
   let navigate = useNavigate();
 
-  let loginUser = async (userName, password) => {
+  let loginUser = async (userName, password,setLoading) => {
+    setLoading(true);
     let response = await fetch(`${API_URL}/api/token/`, {
       method: "POST",
       headers: {
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     let data = await response.json();
+    setLoading(false);
     if (response.status === 200) {
       if(jwt_decode(JSON.stringify(data)).role !== "admin"){
         alert("Access Denied!")
