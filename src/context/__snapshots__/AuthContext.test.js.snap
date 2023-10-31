@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthContext logs in a user and sets the context 1`] = `
+<div>
+  <button>
+    Login
+  </button>
+  <div>
+    Username: 
+  </div>
+  <div>
+    Token: 
+  </div>
+</div>
+`;
+
+exports[`AuthContext logs out a user and clears the context 1`] = `
+<div>
+  <button>
+    Logout
+  </button>
+  <div>
+    Username: 
+  </div>
+  <div>
+    Token: 
+  </div>
+</div>
+`;
+
+exports[`AuthContext provides initial context with no user 1`] = `
+<div>
+  <div>
+    Username: 
+  </div>
+  <div>
+    Token: 
+  </div>
+</div>
+`;

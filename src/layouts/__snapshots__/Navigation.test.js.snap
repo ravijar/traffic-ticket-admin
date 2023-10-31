@@ -1,0 +1,585 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation renders the navigation bar with the provided items 1`] = `
+<div>
+  <div>
+    <div
+      class="MuiBox-root css-k008qs"
+    >
+      <header
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1vuz5ya-MuiPaper-root-MuiAppBar-root"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1j3vlsi-MuiToolbar-root"
+        >
+          <div
+            class="MuiBox-root css-1jk8eue"
+          >
+            <img
+              alt="logo"
+              height="56px"
+              src="./logo.png"
+              width="50px"
+            />
+          </div>
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          >
+            TRAFFIC TICKET
+          </h5>
+          <div
+            class="MuiBox-root css-43qrs9"
+          />
+        </div>
+      </header>
+      <div
+        class="MuiDrawer-root MuiDrawer-docked css-jculhl-MuiDrawer-docked"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        >
+          <ul
+            class="MuiList-root MuiList-padding css-1prfeb0-MuiList-root"
+          >
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters Mui-selected MuiListItemButton-root MuiListItemButton-gutters Mui-selected css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="DashboardIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Dashboard
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="PolicyIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m21 5-9-4-9 4v6c0 5.55 3.84 10.74 9 12 2.3-.56 4.33-1.9 5.88-3.71l-3.12-3.12c-1.94 1.29-4.58 1.07-6.29-.64-1.95-1.95-1.95-5.12 0-7.07 1.95-1.95 5.12-1.95 7.07 0 1.71 1.71 1.92 4.35.64 6.29l2.9 2.9C20.29 15.69 21 13.38 21 11V5z"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Review
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LeaderboardIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7.5 21H2V9h5.5v12zm7.25-18h-5.5v18h5.5V3zM22 11h-5.5v10H22V11z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Reports
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="PendingActionsIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm1.65 7.35L16.5 17.2V14h1v2.79l1.85 1.85-.7.71zM18 3h-3.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H6c-1.1 0-2 .9-2 2v15c0 1.1.9 2 2 2h6.11c-.59-.57-1.07-1.25-1.42-2H6V5h2v3h8V5h2v5.08c.71.1 1.38.31 2 .6V5c0-1.1-.9-2-2-2zm-6 2c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Schedule
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="PersonAddAlt1Icon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M13 8c0-2.21-1.79-4-4-4S5 5.79 5 8s1.79 4 4 4 4-1.79 4-4zm2 2v2h3v3h2v-3h3v-2h-3V7h-2v3h-3zM1 18v2h16v-2c0-2.66-5.33-4-8-4s-8 1.34-8 4z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Register
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-c0kv7f-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LogoutIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m17 7-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Logout
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-9rzp0l"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+        />
+      </div>
+    </div>
+    <button>
+      Logout
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Navigation selects the current route in the navigation bar 1`] = `
+<div>
+  <div>
+    <div
+      class="MuiBox-root css-k008qs"
+    >
+      <header
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1vuz5ya-MuiPaper-root-MuiAppBar-root"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1j3vlsi-MuiToolbar-root"
+        >
+          <div
+            class="MuiBox-root css-1jk8eue"
+          >
+            <img
+              alt="logo"
+              height="56px"
+              src="./logo.png"
+              width="50px"
+            />
+          </div>
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+          >
+            TRAFFIC TICKET
+          </h5>
+          <div
+            class="MuiBox-root css-43qrs9"
+          />
+        </div>
+      </header>
+      <div
+        class="MuiDrawer-root MuiDrawer-docked css-jculhl-MuiDrawer-docked"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        >
+          <ul
+            class="MuiList-root MuiList-padding css-1prfeb0-MuiList-root"
+          >
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="DashboardIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Dashboard
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters Mui-selected MuiListItemButton-root MuiListItemButton-gutters Mui-selected css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="PolicyIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m21 5-9-4-9 4v6c0 5.55 3.84 10.74 9 12 2.3-.56 4.33-1.9 5.88-3.71l-3.12-3.12c-1.94 1.29-4.58 1.07-6.29-.64-1.95-1.95-1.95-5.12 0-7.07 1.95-1.95 5.12-1.95 7.07 0 1.71 1.71 1.92 4.35.64 6.29l2.9 2.9C20.29 15.69 21 13.38 21 11V5z"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Review
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LeaderboardIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7.5 21H2V9h5.5v12zm7.25-18h-5.5v18h5.5V3zM22 11h-5.5v10H22V11z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Reports
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="PendingActionsIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm1.65 7.35L16.5 17.2V14h1v2.79l1.85 1.85-.7.71zM18 3h-3.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H6c-1.1 0-2 .9-2 2v15c0 1.1.9 2 2 2h6.11c-.59-.57-1.07-1.25-1.42-2H6V5h2v3h8V5h2v5.08c.71.1 1.38.31 2 .6V5c0-1.1-.9-2-2-2zm-6 2c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Schedule
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="PersonAddAlt1Icon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M13 8c0-2.21-1.79-4-4-4S5 5.79 5 8s1.79 4 4 4 4-1.79 4-4zm2 2v2h3v3h2v-3h3v-2h-3V7h-2v3h-3zM1 18v2h16v-2c0-2.66-5.33-4-8-4s-8 1.34-8 4z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Register
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters css-c0kv7f-MuiListItem-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+                  style="min-width: 40px;"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LogoutIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m17 7-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+                  >
+                    Logout
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-9rzp0l"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+        />
+      </div>
+    </div>
+    <button>
+      Logout
+    </button>
+  </div>
+</div>
+`;
